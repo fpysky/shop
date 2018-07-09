@@ -14,4 +14,9 @@ class PagesController extends Controller
     {
         return view('pages.email_verify_notice');
     }
+
+    public function test(){
+        $this->dispatch(new \App\Jobs\Test(10));
+        return ['aaa' => 'aaa'];
+    }
 }
