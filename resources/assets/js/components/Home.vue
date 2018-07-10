@@ -1,3 +1,3 @@
 <template>
-    <h1>Laravel 5 Vue SPA 认证</h1>
+    <h1>这里是未登陆的首页</h1>
 </template>

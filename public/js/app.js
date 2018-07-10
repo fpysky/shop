@@ -1174,7 +1174,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_2_axios___default.a);
 __WEBPACK_IMPORTED_MODULE_2_axios___default.a.defaults.baseURL = 'http://shop.test/api';
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-    mode: 'history',
+    // mode:'history',
     routes: [{
         path: '/',
         name: 'home',
@@ -16153,7 +16153,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Laravel 5 – 酷炫的后台")])
+  return _c("h1", [_vm._v("这里是已登陆的首页")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -16220,7 +16220,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Laravel 5 Vue SPA 认证")])
+  return _c("h1", [_vm._v("这里是未登陆的首页")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -16425,7 +16425,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.error && _vm.errors.name
                   ? _c("span", { staticClass: "help-block" }, [
-                      _vm._v(_vm._s(_vm.errors.name))
+                      _vm._v(_vm._s(_vm.errors.name[0]))
                     ])
                   : _vm._e()
               ]
@@ -16469,7 +16469,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.error && _vm.errors.email
                   ? _c("span", { staticClass: "help-block" }, [
-                      _vm._v(_vm._s(_vm.errors.email))
+                      _vm._v(_vm._s(_vm.errors.email[0]))
                     ])
                   : _vm._e()
               ]
@@ -16508,7 +16508,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.error && _vm.errors.password
                   ? _c("span", { staticClass: "help-block" }, [
-                      _vm._v(_vm._s(_vm.errors.password))
+                      _vm._v(_vm._s(_vm.errors.password[0]))
                     ])
                   : _vm._e()
               ]
@@ -16611,7 +16611,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       email: null,
       password: null,
-      error: false
+      error: false,
+      errors: {}
     };
   },
 
@@ -16624,7 +16625,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           password: app.password
         },
         success: function success() {},
-        error: function error() {},
+        error: function error(resp) {
+          app.error = true;
+          app.errors = resp.response.data.error;
+        },
         rememberMe: true,
         redirect: '/dashboard',
         fetchUser: true
@@ -16644,7 +16648,7 @@ var render = function() {
   return _c("div", [
     _vm.error
       ? _c("div", { staticClass: "alert alert-danger" }, [
-          _c("p", [_vm._v("出错了，请检查邮箱/密码是否正确")])
+          _c("p", { domProps: { textContent: _vm._s(_vm.errors) } })
         ])
       : _vm._e(),
     _vm._v(" "),

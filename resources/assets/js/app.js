@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 axios.defaults.baseURL = 'http://shop.test/api';
 const router = new VueRouter({
-    mode:'history',
+    // mode:'history',
     routes: [{
         path: '/',
         name: 'home',

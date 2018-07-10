@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="alert alert-danger" v-if="error">
-            <p>出错了，请检查邮箱/密码是否正确</p>
+            <p v-text="errors"></p>
         </div>
         <form autocomplete="off" @submit.prevent="login" method="post">
             <div class="form-group">
@@ -22,7 +22,8 @@
       return {
         email: null,
         password: null,
-        error: false
+        error: false,
+        errors: {}
       }
     },
     methods: {
@@ -34,7 +35,10 @@
               password: app.password
             }, 
             success: function () {},
-            error: function () {},
+            error: function (resp) {
+              app.error = true;
+              app.errors = resp.response.data.error;
+            },
             rememberMe: true,
             redirect: '/dashboard',
             fetchUser: true,

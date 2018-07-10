@@ -10,17 +10,17 @@
             <div class="form-group" v-bind:class="{ 'has-error': error && errors.name }">
                 <label for="name">用户名</label>
                 <input type="text" id="name" class="form-control" v-model="name" required>
-                <span class="help-block" v-if="error && errors.name">{{ errors.name }}</span>
+                <span class="help-block" v-if="error && errors.name">{{ errors.name[0] }}</span>
             </div>
             <div class="form-group" v-bind:class="{ 'has-error': error && errors.email }">
                 <label for="email">邮箱</label>
                 <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
-                <span class="help-block" v-if="error && errors.email">{{ errors.email }}</span>
+                <span class="help-block" v-if="error && errors.email">{{ errors.email[0] }}</span>
             </div>
             <div class="form-group" v-bind:class="{ 'has-error': error && errors.password }">
                 <label for="password">密码</label>
                 <input type="password" id="password" class="form-control" v-model="password" required>
-                <span class="help-block" v-if="error && errors.password">{{ errors.password }}</span>
+                <span class="help-block" v-if="error && errors.password">{{ errors.password[0] }}</span>
             </div>
             <button type="submit" class="btn btn-default">提交</button>
         </form>
