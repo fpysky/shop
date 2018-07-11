@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use JWTAuth;
+use JWTAuth,Auth;
 
 class User extends Authenticatable
 {
@@ -50,14 +50,21 @@ class User extends Authenticatable
             ], 400);
         }
         return response(['status' => 'success'])
-            ->header('Authorization', $token);
+            ->header('Authorization', $token)->header("Access-Control-Expose-Headers","Authorization");
     }
 
     public static function user(){
-        $user = User::find(Auth::user()->id);
-        return response([
-            'status' => 'success',
-            'data' => $user
-        ]);
+        try{
+            $user = User::find(Auth::user()->id);
+            return response([
+                'status' => 'success',
+                'data' => $user
+            ]);
+        }catch (\Exception $e){
+            return response([
+                'aaa' => $e->getMessage()
+            ]);
+        }
+
     }
 }
