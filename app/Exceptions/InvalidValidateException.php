@@ -23,7 +23,7 @@ class InvalidValidateException extends Exception
     public function render(Request $request)
     {
         if ($request->expectsJson()) {
-            return response()->json(['code' => 1,'errors' => $this->validator->errors()],$this->status);
+            return response()->json(['code' => 422,'errors' => $this->validator->errors()],$this->status);
         }else{
             return view('error.error', ['message' => $this->validator->errors()->first()]);
         }

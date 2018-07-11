@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterFormRequest;
+use App\Http\Requests\LoginFormRequest;
 use JWTAuth,Auth;
 use App\Models\User;
 
@@ -15,10 +16,46 @@ class AuthController extends Controller
         return User::register($args);
     }
 
-    public function login(Request $request)
+    public function login(LoginFormRequest $request)
     {
-        $credentials = $request->only('email', 'password');
-        return User::login($credentials);
+        $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
+        if($res['code'] == 0){
+            $credentials = $request->only('email', 'password');
+            return User::login($credentials);
+        }else{
+            return $res;
+        }
+
+    }
+    protected function valiGeet($args){
+        $id = config('geetest.id');
+        $key = config('geetest.key');
+        $geek = new \GeetestLib($id, $key);
+
+        $geetest_challenge = $args['geetest_challenge'];
+        $geetest_validate = $args['geetest_validate'];
+        $geetest_seccode = $args['geetest_seccode'];
+        $geetest_status = $args['geetest_status'];
+
+        $data = array(
+//            "user_id" => $userid, # 网站用户id
+            "client_type" => "native", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
+            "ip_address" => "127.0.0.1"//$this->request->getClientIp() # 请在此处传输用户请求验证时所携带的IP
+        );
+        if ($geetest_status == 1) {   //服务器正常
+            $result = $geek->success_validate($geetest_challenge, $geetest_validate, $geetest_seccode, $data);
+            if ($result) {
+                return ['code' => 0,'message' => 'success'];
+            } else {
+                return ['code' => 1,'message' => '验证失败请重试'];
+            }
+        } else {  //服务器宕机,走failback模式
+            if ($geek->fail_validate($geetest_challenge, $geetest_validate, $geetest_seccode)) {
+                return ['code' => 0,'message' => 'success'];
+            } else {
+                return ['code' => 1,'message' => '验证失败请重试'];
+            }
+        }
     }
 
     public function user()

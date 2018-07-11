@@ -15,7 +15,7 @@ class RegisterFormRequest extends Request
 
     public function messages(){
         return [
-            'name.request' => '用户名不能为空',
+            'name.required' => '用户名不能为空',
             'name.string' => '用户名必须是字符串',
             'name.unique' => '用户名已存在',
             'email.required' => '邮箱不能为空',

@@ -54,17 +54,10 @@ class User extends Authenticatable
     }
 
     public static function user(){
-        try{
-            $user = User::find(Auth::user()->id);
-            return response([
-                'status' => 'success',
-                'data' => $user
-            ]);
-        }catch (\Exception $e){
-            return response([
-                'aaa' => $e->getMessage()
-            ]);
-        }
-
+        $user = User::find(Auth::user()->id);
+        return response([
+            'status' => 'success',
+            'data' => $user
+        ]);
     }
 }
