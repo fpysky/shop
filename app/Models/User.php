@@ -43,11 +43,8 @@ class User extends Authenticatable
 
     public static function login($credentials){
         if ( ! $token = JWTAuth::attempt($credentials)) {
-            return response([
-                'status' => 'error',
-                'error' => '邮箱或密码不正确',
-                'message' => ''
-            ], 400);
+            $errors['errors'] = ['邮箱或密码不正确'];
+            return response()->json(['code' => 1,'errors' => $errors],400);
         }
         return response(['status' => 'success'])
             ->header('Authorization', $token)->header("Access-Control-Expose-Headers","Authorization");

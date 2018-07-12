@@ -12,8 +12,14 @@ class AuthController extends Controller
 {
     public function register(RegisterFormRequest $request)
     {
-        $args = $request->all();
-        return User::register($args);
+        $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
+        if($res['code'] == 0){
+            $args = $request->all();
+            return User::register($args);
+        }else{
+            return $res;
+        }
+
     }
 
     public function login(LoginFormRequest $request)

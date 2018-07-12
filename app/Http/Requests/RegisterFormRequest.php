@@ -10,6 +10,10 @@ class RegisterFormRequest extends Request
             'name' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|max:10',
+            'geetest_challenge' => 'required',
+            'geetest_validate' => 'required',
+            'geetest_seccode' => 'required',
+            'geetest_status' => 'required',
         ];
     }
 
@@ -24,7 +28,11 @@ class RegisterFormRequest extends Request
             'password.required' => '密码不能为空',
             'password.string' => '密码必须是字符串',
             'password.min' => '密码至少6为数',
-            'password.max' => '密码最多10位数'
+            'password.max' => '密码最多10位数',
+            'geetest_challenge.required' => '请点击以滑动校验验证码',
+            'geetest_validate.required' => '请点击以滑动校验验证码',
+            'geetest_seccode.required' => '请点击以滑动校验验证码',
+            'geetest_status.required' => '请点击以滑动校验验证码'
         ];
     }
 }
