@@ -36,8 +36,8 @@ class User extends Authenticatable
         $user->password = bcrypt($args['password']);
         $user->save();
         return response([
-            'status' => 'success',
-            'data' => $user
+            'code' => 0,
+            'message' => '',
         ], 200);
     }
 
@@ -46,14 +46,14 @@ class User extends Authenticatable
             $errors['errors'] = ['邮箱或密码不正确'];
             return response()->json(['code' => 1,'errors' => $errors],400);
         }
-        return response(['status' => 'success'])
+        return response(['code' => 0,'message' => ''])
             ->header('Authorization', $token)->header("Access-Control-Expose-Headers","Authorization");
     }
 
     public static function user(){
         $user = User::find(Auth::user()->id);
         return response([
-            'status' => 'success',
+            'code' => 0,
             'data' => $user
         ]);
     }

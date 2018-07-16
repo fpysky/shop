@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use App\Exceptions\InvalidValidateException;
+use Dingo\Api\Exception\StoreResourceFailedException;
 
 class request extends FormRequest
 {
@@ -15,6 +15,6 @@ class request extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        throw new InvalidValidateException($validator);
+        throw new StoreResourceFailedException('验证不通过',$validator->errors());
     }
 }
