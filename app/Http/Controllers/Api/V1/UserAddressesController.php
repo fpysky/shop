@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserAddress;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAddressRequest;
+use Auth;
 
 class UserAddressesController extends Controller
 {
@@ -67,6 +68,8 @@ class UserAddressesController extends Controller
 
     public function create(UserAddressRequest $request){
         $args = $request->all();
-        
+        $args['id'] = isset($args['id'])?$args['id']:0;
+        $args['user_id'] = Auth::user()->id;
+        return UserAddress::create($args);
     }
 }

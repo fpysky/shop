@@ -38,5 +38,27 @@ class UserAddress extends Base
         return ['time' => time(),'code' => 0,'message' => '','list' => $list,'total' => $total,'totalPage' => $totalPage];
     }
 
+    public static function create($args){
+        try{
+            if($args['id'] == 0){
+                $userAddress = new UserAddress();
+                $userAddress->user_id = $args['user_id'];
+                $userAddress->province = intval($args['province']);
+                $userAddress->city = intval($args['city']);
+                $userAddress->district = intval($args['district']);
+                $userAddress->address = $args['address'];
+                $userAddress->zip = intval($args['zip']);
+                $userAddress->contact_name = $args['contact_name'];
+                $userAddress->contact_phone = $args['contact_phone'];
+                $userAddress->created_at = time();
+                $userAddress->updated_at = time();
+                $userAddress->save();
+            }else{
 
+            }
+        }catch (\Exception $e){
+
+        }
+
+    }
 }
