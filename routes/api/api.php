@@ -6,6 +6,7 @@ $api->version('v1', function ($api) {
         $api->post('auth/register','AuthController@register');
         $api->post('auth/login','AuthController@login');
         $api->post('geetest_api_v1','AuthController@geetest_api_v1');//极验后端校验
+
     });
     $api->group([
         'middleware' => 'jwt.api.auth',
@@ -13,6 +14,7 @@ $api->version('v1', function ($api) {
     ], function ($api) {
         $api->post('auth/user', 'AuthController@user');
         $api->post('auth/logout', 'AuthController@logout');
+        $api->post('addresses', 'UserAddressesController@addresses');
     });
     $api->group([
         'middleware' => 'jwt.api.refresh',

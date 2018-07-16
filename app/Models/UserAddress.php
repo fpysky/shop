@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Http\Resources\UserAddressResource;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
-class UserAddress extends Model
+class UserAddress extends Base
 {
     protected $fillable = [
         'province',
@@ -27,4 +29,14 @@ class UserAddress extends Model
     {
         return "{$this->province}{$this->city}{$this->district}{$this->address}";
     }
+
+    public static function addresses($args){
+        $list = UserAddress::where('user_id','=',Auth::user()->id)->paginate($args['pSize']);
+        $total = $list->total();
+        $totalPage = ceil($total / $args['pSize']);
+        $list = UserAddressResource::collection($list);
+        return ['time' => time(),'code' => 0,'message' => '','list' => $list,'total' => $total,'totalPage' => $totalPage];
+    }
+
+
 }
