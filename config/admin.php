@@ -5,7 +5,7 @@ return [
     /*
      * 站点标题
      */
-    'name' => 'Shop',
+    'name' => 'Laravel Shop',
 
     /*
      * 页面顶部 Logo
