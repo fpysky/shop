@@ -33,7 +33,7 @@ class AuthController extends Controller
      *     HTTP/1.1 200
      *     {
      *       "message": "",
-     *       "code":0,
+     *       "status_code":0,
      *     }
      * @apiErrorExample {json} 错误返回
      *     HTTP/1.1 422
@@ -79,7 +79,7 @@ class AuthController extends Controller
      *     HTTP/1.1 200
      *     {
      *       "message": "",
-     *       "code":0
+     *       "status_code":0
      *     }
      * @apiErrorExample {json} 错误返回
      *     HTTP/1.1 422
@@ -96,11 +96,19 @@ class AuthController extends Controller
      *          },
      *          "status_code": 422
      *      }
+     *      HTTP/1.1 422（极验验证不通过）
+     *     {
+     *          "message": "验证不通过",
+     *          "errors": {
+     *              "error": ["验证失败请重试"],
+     *          },
+     *          "status_code": 422
+     *      }
      *     HTTP/1.1 400
      *     {
      *          "message": "验证不通过",
      *          "errors": {
-     *              "errors": ["邮箱或密码不正确"],
+     *              "error": ["邮箱或密码不正确"],
      *          },
      *          "status_code": 400
      *      }
@@ -134,21 +142,21 @@ class AuthController extends Controller
         if ($geetest_status == 1) {   //服务器正常
             $result = $geek->success_validate($geetest_challenge, $geetest_validate, $geetest_seccode, $data);
             if ($result) {
-                return ['code' => 0,'message' => 'success'];
+                return response()->json(['status_code' => 0,'message' => '验证成功'],200);
             } else {
-                return ['code' => 1,'message' => '验证失败请重试'];
+                return response()->json(['status_code' => 422,'message' => '验证不通过','errors' => ['error' => '验证失败请重试']],422);
             }
         } else {  //服务器宕机,走failback模式
             if ($geek->fail_validate($geetest_challenge, $geetest_validate, $geetest_seccode)) {
-                return ['code' => 0,'message' => 'success'];
+                return response()->json(['status_code' => 0,'message' => '验证成功'],200);
             } else {
-                return ['code' => 1,'message' => '验证失败请重试'];
+                return response()->json(['status_code' => 422,'message' => '验证不通过','errors' => ['error' => '验证失败请重试']],422);
             }
         }
     }
 
     /**
-     * @api {post} /api/auth/user 03.获取用户信息
+     * @api {get} /api/auth/user 03.获取用户信息
      * @apiName user
      * @apiGroup 01Auth
      *
@@ -162,7 +170,7 @@ class AuthController extends Controller
      *          "created_at":"2018-07-10 02:27:51",
      *          "updated_at":"2018-07-10 02:27:51"
      *       },
-     *       "code":0
+     *       "status_code":0
      *     }
      */
     public function user()
@@ -170,7 +178,11 @@ class AuthController extends Controller
         return User::user();
     }
 
-
+    /**
+     * @api {get} /api/auth/refresh 03.刷新token
+     * @apiName refresh
+     * @apiGroup 01Auth
+     */
     public function refresh()
     {
         return response([
@@ -187,14 +199,14 @@ class AuthController extends Controller
      *     HTTP/1.1 200
      *     {
      *       "message":"退出成功",
-     *       "code":0
+     *       "status_code":0
      *     }
      */
     public function logout()
     {
         JWTAuth::invalidate();
         return response([
-            'code' => 0,
+            'status_code' => 0,
             'message' => '退出成功'
         ], 200);
     }
@@ -212,7 +224,7 @@ class AuthController extends Controller
      *          "challenge": "30d33f3d3cd369458f7831928945f843",
      *          "new_captcha": 1,
      *          "status": 1
-     *       }
+     *      }
      */
     public function geetest_api_v1()
     {

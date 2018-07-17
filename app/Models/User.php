@@ -36,24 +36,23 @@ class User extends Authenticatable
         $user->password = bcrypt($args['password']);
         $user->save();
         return response([
-            'code' => 0,
+            'status_code' => 0,
             'message' => '',
         ], 200);
     }
 
     public static function login($credentials){
         if ( ! $token = JWTAuth::attempt($credentials)) {
-            $errors['errors'] = ['邮箱或密码不正确'];
-            return response()->json(['code' => 1,'errors' => $errors],400);
+            return response()->json(['status_code' => 1,'errors' => ['error' => '邮箱或密码不正确']],400);
         }
-        return response(['code' => 0,'message' => ''])
+        return response(['status_code' => 0,'message' => '登陆成功'])
             ->header('Authorization', $token)->header("Access-Control-Expose-Headers","Authorization");
     }
 
     public static function user(){
         $user = User::find(Auth::user()->id);
         return response([
-            'code' => 0,
+            'status_code' => 0,
             'data' => $user
         ]);
     }

@@ -7,6 +7,7 @@ use App\Models\UserAddress;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAddressRequest;
 use Auth;
+use Dingo\Api\Exception\DeleteResourceFailedException;
 
 class UserAddressesController extends Controller
 {
@@ -16,18 +17,17 @@ class UserAddressesController extends Controller
      */
 
     /**
-     * @api {post} /api/addresses 01.获取用户地址列表
-     * @apiName UserAddresses
+     * @api {get} /api/addresses 01.获取用户地址列表
+     * @apiName addresses
      * @apiGroup 01UserAddresses
      *
-     * @apiParam {String} pSize        M   单页显示记录条数（默认10）
-     * @apiParam {String} page         M   页码
+     * @apiParam {Number} pSize        M   单页显示记录条数（默认10）
+     * @apiParam {Number} page         M   页码
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
      *     {
-     *      "code": 0,
-     *      "message": "",
+     *      "status_code": 0,
      *      "list": [
      *          {
      *              "id": 1,
@@ -58,7 +58,7 @@ class UserAddressesController extends Controller
      *      ],
      *      "total": 2,
      *      "totalPage": 1
-     *      }
+     *     }
      */
     public function addresses(Request $request){
         $args = $request->all();
@@ -66,10 +66,71 @@ class UserAddressesController extends Controller
         return UserAddress::addresses($args);
     }
 
-    public function create(UserAddressRequest $request){
+    /**
+     * @api {post} /api/addresses 02.用户地址添加&修改
+     * @apiName store
+     * @apiGroup 01UserAddresses
+     *
+     * @apiParam {Number} id             C   地址ID（0 => 新增）
+     * @apiParam {Number} province       M   省份
+     * @apiParam {Number} city           M   城市
+     * @apiParam {Number} district       M   区域
+     * @apiParam {String} address        M   详细地址
+     * @apiParam {Number} zip            M   邮编
+     * @apiParam {String} contact_name   M   收货人姓名
+     * @apiParam {String} contact_phone  M   收货人手机号
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+     *      "status_code": 0,
+     *      "message": ""
+     *     }
+     * @apiErrorExample {json} 错误返回
+     *     HTTP/1.1 422
+     *     {
+     *          "message": "验证不通过",
+     *          "errors": {
+     *              "province": ["省份不能为空"],
+     *              "city": ["城市不能为空"],
+     *          },
+     *          "status_code": 422
+     *      }
+     *     HTTP/1.1 500
+     *     {
+     *      "status_code": 1,
+     *      "message": "错误信息"
+     *     }
+     */
+    public function store(UserAddressRequest $request){
         $args = $request->all();
         $args['id'] = isset($args['id'])?$args['id']:0;
         $args['user_id'] = Auth::user()->id;
-        return UserAddress::create($args);
+        return UserAddress::store($args);
+    }
+
+    /**
+     * @api {post} /api/addresses 03.删除用户地址
+     * @apiName destroy
+     * @apiGroup 01UserAddresses
+     *
+     * @apiParam {Number} id             C   地址ID
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+     *      "status_code": 0,
+     *      "message": "操作成功"
+     *     }
+     * @apiErrorExample {json} 错误返回
+     *     HTTP/1.1 200
+     *     {
+     *      "status_code": 500,
+     *      "message": "错误信息"
+     *     }
+     */
+    public function destroy($address){
+        $address = intval($address);
+        return UserAddress::destroy($address);
     }
 }
