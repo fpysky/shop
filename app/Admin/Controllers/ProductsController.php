@@ -38,10 +38,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         return Admin::content(function (Content $content) use ($id) {
-
-            $content->header('header');
-            $content->description('description');
-
+            $content->header('编辑商品');
             $content->body($this->form()->edit($id));
         });
     }
@@ -54,7 +51,6 @@ class ProductsController extends Controller
     public function create()
     {
         return Admin::content(function (Content $content) {
-
             $content->header('创建商品');
             $content->body($this->form());
         });

@@ -21,8 +21,7 @@ class CreateProductSkusTable extends Migration
             $table->unsignedInteger('stock');
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->unsignedInteger('created_at');
-            $table->unsignedInteger('updated_at');
+            $table->timestamps();
         });
     }
 

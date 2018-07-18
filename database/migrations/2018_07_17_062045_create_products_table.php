@@ -23,8 +23,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('sold_count')->default(0);
             $table->unsignedInteger('review_count')->default(0);
             $table->decimal('price', 10, 2);
-            $table->unsignedInteger('created_at');
-            $table->unsignedInteger('updated_at');
+            $table->timestamps();
         });
     }
 
