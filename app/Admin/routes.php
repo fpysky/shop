@@ -21,4 +21,8 @@ Route::group([
     $router->get('productClassify','ProductClassifyController@index');
     $router->get('productClassify/create','ProductClassifyController@create');
     $router->get('productClassify/getRootClassify','ProductClassifyController@getRootClassify');
+    $router->post('productClassify','ProductClassifyController@store');
+    $router->delete('productClassify/{id}','ProductClassifyController@destroy');
+    $router->get('productClassify/{id}/edit','ProductClassifyController@edit');
+    $router->put('productClassify/{id}','ProductClassifyController@update');
 });

@@ -6,7 +6,7 @@ use App\Http\Resources\UserAddressResource;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class UserAddress extends Base
+class UserAddress extends Model
 {
     protected $fillable = [
         'province',
@@ -49,8 +49,6 @@ class UserAddress extends Base
             $userAddress->zip = intval($args['zip']);
             $userAddress->contact_name = $args['contact_name'];
             $userAddress->contact_phone = $args['contact_phone'];
-            $userAddress->created_at = time();
-            $userAddress->updated_at = time();
             $userAddress->save();
         }else{
             $userAddress = UserAddress::where('id','=',$args['id'])->firstOrFail();
@@ -61,7 +59,6 @@ class UserAddress extends Base
             $userAddress->zip = intval($args['zip']);
             $userAddress->contact_name = $args['contact_name'];
             $userAddress->contact_phone = $args['contact_phone'];
-            $userAddress->updated_at = time();
             $userAddress->save();
         }
         return response(['status_code' => 0,'message' => '操作成功']);

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Product extends Base
+class Product extends Model
 {
     protected $fillable = [
         'title', 'description', 'image', 'on_sale',

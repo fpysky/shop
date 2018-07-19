@@ -24,8 +24,8 @@ class UserAddressResource extends Resource
             'zip' => $this->zip,
             'contact_name' => $this->contact_name,
             'contact_phone' => $this->contact_phone,
-            'created_at' => empty($this->created_at)?'':date('Y-m-d H-i',$this->created_at),
-            'updated_at' => empty($this->updated_at)?'':date('Y-m-d H-i',$this->updated_at),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

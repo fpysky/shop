@@ -54,11 +54,11 @@ class AuthController extends Controller
     public function register(RegisterFormRequest $request)
     {
         $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
-        if($res['code'] == 0){
+        if($res['status_code'] == 0){
             $args = $request->all();
             return User::register($args);
         }else{
-            return $res;
+            return response($res,422);
         }
 
     }
@@ -116,11 +116,11 @@ class AuthController extends Controller
     public function login(LoginFormRequest $request)
     {
         $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
-        if($res['code'] == 0){
+        if($res['status_code'] == 0){
             $credentials = $request->only('email', 'password');
             return User::login($credentials);
         }else{
-            return $res;
+            return response($res,422);
         }
 
     }
@@ -142,15 +142,15 @@ class AuthController extends Controller
         if ($geetest_status == 1) {   //服务器正常
             $result = $geek->success_validate($geetest_challenge, $geetest_validate, $geetest_seccode, $data);
             if ($result) {
-                return response()->json(['status_code' => 0,'message' => '验证成功'],200);
+                return ['status_code' => 0,'message' => '验证成功'];
             } else {
-                return response()->json(['status_code' => 422,'message' => '验证不通过','errors' => ['error' => '验证失败请重试']],422);
+                return ['status_code' => 422,'message' => '验证不通过','errors' => ['error' => '验证失败请重试']];
             }
         } else {  //服务器宕机,走failback模式
             if ($geek->fail_validate($geetest_challenge, $geetest_validate, $geetest_seccode)) {
-                return response()->json(['status_code' => 0,'message' => '验证成功'],200);
+                return ['status_code' => 0,'message' => '验证成功'];
             } else {
-                return response()->json(['status_code' => 422,'message' => '验证不通过','errors' => ['error' => '验证失败请重试']],422);
+                return ['status_code' => 422,'message' => '验证不通过','errors' => ['error' => '验证失败请重试']];
             }
         }
     }

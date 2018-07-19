@@ -25,3 +25,4 @@ $api->version('v1', function ($api) {
 });
 
 include 'address.php';
+include 'productClassify.php';

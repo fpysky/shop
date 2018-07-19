@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class ProductSku extends Base
+class ProductSku extends Model
 {
     protected $fillable = ['title', 'description', 'price', 'stock'];
 

@@ -16,7 +16,7 @@ class ProductClassifyController extends Controller
     use ModelForm;
 
     public function getRootClassify(){
-        $arr = [];
+        $arr = [['id' => 0,'text' => 'root']];
         $list = ProductClassify::getRootClassify();
         if(!empty($list)){
             foreach($list as $k => $v){
@@ -51,10 +51,7 @@ class ProductClassifyController extends Controller
     public function edit($id)
     {
         return Admin::content(function (Content $content) use ($id) {
-
-            $content->header('header');
-            $content->description('description');
-
+            $content->header('编辑商品分类');
             $content->body($this->form()->edit($id));
         });
     }
@@ -80,7 +77,6 @@ class ProductClassifyController extends Controller
     protected function grid()
     {
         return Admin::grid(ProductClassify::class, function (Grid $grid) {
-
             $grid->id('ID')->sortable();
             $grid->name('分类名');
             $grid->pid('父分类ID');
@@ -97,8 +93,7 @@ class ProductClassifyController extends Controller
     protected function form()
     {
         return Admin::form(ProductClassify::class, function (Form $form) {
-
-            $form->select('pid','选择父分类')->options('getRootClassify');
+            $form->select('pid','选择父分类')->options('/admin/productClassify/getRootClassify');
             $form->text('name', '分类名')->rules('required');
         });
     }
