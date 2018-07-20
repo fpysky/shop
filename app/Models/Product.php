@@ -25,4 +25,9 @@ class Product extends Model
         }
         return \Storage::disk('public')->url($this->attributes['image']);
     }
+
+    //热品推荐
+    public static function hotProducts(){
+        $list = Product::where();
+    }
 }

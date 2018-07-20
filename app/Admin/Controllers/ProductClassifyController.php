@@ -28,6 +28,19 @@ class ProductClassifyController extends Controller
         return $arr;
     }
 
+    public function getSecondRootClassify(){
+        $arr = [['id' => 0,'text' => 'root']];
+        $list = ProductClassify::getSecondRootClassify();
+        if(!empty($list)){
+            foreach($list as $k => $v){
+                $r['id'] = $v['id'];
+                $r['text'] = $v['name'];
+                $arr[] = $r;
+            }
+        }
+        return $arr;
+    }
+
     /**
      * Index interface.
      *

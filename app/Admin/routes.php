@@ -17,10 +17,12 @@ Route::group([
     $router->post('products', 'ProductsController@store');
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
+    $router->delete('products/{id}','ProductsController@destroy');
     //商品分类
     $router->get('productClassify','ProductClassifyController@index');
     $router->get('productClassify/create','ProductClassifyController@create');
     $router->get('productClassify/getRootClassify','ProductClassifyController@getRootClassify');
+    $router->get('productClassify/getSecondRootClassify','ProductClassifyController@getSecondRootClassify');
     $router->post('productClassify','ProductClassifyController@store');
     $router->delete('productClassify/{id}','ProductClassifyController@destroy');
     $router->get('productClassify/{id}/edit','ProductClassifyController@edit');

@@ -74,9 +74,9 @@ class ProductsController extends Controller
             $grid->sold_count('销量');
             $grid->review_count('评论数');
 
-            $grid->actions(function ($actions) {
-                $actions->disableDelete();
-            });
+//            $grid->actions(function ($actions) {
+//                $actions->disableDelete();
+//            });
             $grid->tools(function ($tools) {
                 // 禁用批量删除按钮
                 $tools->batch(function ($batch) {
@@ -98,6 +98,8 @@ class ProductsController extends Controller
 
             // 创建一个输入框，第一个参数 title 是模型的字段名，第二个参数是该字段描述
             $form->text('title', '商品名称')->rules('required');
+
+            $form->select('classify_id','选择父分类')->options('/admin/productClassify/getSecondRootClassify');
 
             // 创建一个选择图片的框
             $form->image('image', '封面图片')->rules('required|image');

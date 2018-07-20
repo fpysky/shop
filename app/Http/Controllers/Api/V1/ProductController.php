@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\ProductClassify;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProductClassifyController extends Controller
+class ProductController extends Controller
 {
     /**
-     * @apidefine 01ProductClassify
-     * 商品分类
+     * @apidefine 01Product
+     * 商品
      */
 
     /**
-     * @api {get} /api/productClassify 01.获取商品分类
-     * @apiName productClassify
-     * @apiGroup 01ProductClassify
+     * @api {get} /api/hotProducts 01.获取商品分类
+     * @apiName hotProducts
+     * @apiGroup 01Product
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -50,7 +51,7 @@ class ProductClassifyController extends Controller
      *
      *   }
      */
-    public function productClassify(){
-        return ProductClassify::getProductClassify();
+    public function hotProducts(){
+        return Product::hotProducts();
     }
 }

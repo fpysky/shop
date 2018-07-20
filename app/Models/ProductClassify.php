@@ -11,6 +11,10 @@ class ProductClassify extends Model
         return ProductClassify::where('pid','=',0)->get()->toArray();
     }
 
+    public static function getSecondRootClassify(){
+        return ProductClassify::where('pid','<>',0)->get()->toArray();
+    }
+
     public static function getProductClassify(){
         $root = ProductClassify::getRootClassify();
         $list = array();
