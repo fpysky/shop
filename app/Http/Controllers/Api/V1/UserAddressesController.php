@@ -110,7 +110,7 @@ class UserAddressesController extends Controller
     }
 
     /**
-     * @api {post} /api/addresses 03.删除用户地址
+     * @api {post} /api/addresses/{address} 03.删除用户地址
      * @apiName destroy
      * @apiGroup 01UserAddresses
      *
