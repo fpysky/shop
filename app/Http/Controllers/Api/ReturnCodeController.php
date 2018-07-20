@@ -27,5 +27,12 @@ class ReturnCodeController{
      * @apiParam {String} 400   登陆错误
      * @apiVersion 0.1.0
      *
+     * @apiErrorExample {json} 错误返回
+     * HTTP/1.1 500
+     *   {
+     *   "status_code": 500,
+     *   "message": "错误信息"
+     *   }
+     *
      */
 }
