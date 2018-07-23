@@ -20,7 +20,7 @@ class ProductClassifyController extends Controller
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
      *     {
-     *          "code": 0,
+     *          "status_code": 0,
      *          "list": [
      *               {
      *                   "id": 1,

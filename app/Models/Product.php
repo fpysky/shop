@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Resources\ProductResource;
+
 class Product extends Model
 {
     protected $fillable = [
@@ -28,6 +30,8 @@ class Product extends Model
 
     //热品推荐
     public static function hotProducts(){
-        $list = Product::where();
+        $list = Product::where('on_sale','=',1)->take(10)->get();
+        $list = ProductResource::collection($list);
+        return response(['status_code' => 0,'list' => $list]);
     }
 }

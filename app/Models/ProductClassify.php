@@ -24,7 +24,7 @@ class ProductClassify extends Model
             $list[] = $r;
             unset($r);
         }
-        return response(['code' => 0,'list' => $list]);
+        return response(['status_code' => 0,'list' => $list]);
     }
 
     protected static function getChild($id){
