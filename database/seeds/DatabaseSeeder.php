@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //商品分类
         DB::table('product_classifies')->insert([[
             'id' => 1,
             'name' => '手机',
@@ -196,5 +197,13 @@ class DatabaseSeeder extends Seeder
             'name' => '餐具',
             'pid' => 40,
         ]]);
+
+        //用户表d
+        DB::table('users')->insert([
+            'id' => 1,
+            'name' => 'a',
+            'password' => encrypt('111111'),
+            'email' => 'a@a.com'
+        ]);
     }
 }
