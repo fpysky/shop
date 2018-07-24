@@ -63,4 +63,9 @@ class User extends Authenticatable
             'data' => $user
         ]);
     }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

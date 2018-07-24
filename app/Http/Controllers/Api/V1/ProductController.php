@@ -192,7 +192,7 @@ class ProductController extends Controller
      * @apiGroup 01Product
      *
      * @apiParam {Number} page                 C   页码
-     * @apiParam {Number} pSize                C   页面显示数量
+     * @apiParam {Number} pSize                C   页面显示数量(默认15)
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
