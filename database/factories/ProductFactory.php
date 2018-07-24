@@ -24,6 +24,5 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
         'sold_count'   => 0,
         'review_count' => 0,
         'price'        => 0,
-        'classify_id'  => 2,//$faker->numberBetween(0, 5),
     ];
 });

@@ -130,7 +130,10 @@ class UserAddressesController extends Controller
      *     }
      */
     public function destroy($address){
-        $address = intval($address);
+        $address = intval($address,0);
+        if($address == 0){
+            return response(['status_code' => 1,'message' => '地址ID不能为空(address)']);
+;        }
         return UserAddress::destroy($address);
     }
 }

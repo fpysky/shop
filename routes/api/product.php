@@ -7,5 +7,6 @@ $api->version('v1', function ($api) {
         'namespace' => 'App\Http\Controllers\Api\V1'
     ], function ($api) {
         $api->get('hotProducts', 'ProductController@hotProducts');//首页热品推荐列表
+        $api->get('product/{id}', 'ProductController@product');//商品详情
     });
 });

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductSkuResource;
 
 class Product extends Model
 {
@@ -32,6 +33,16 @@ class Product extends Model
     public static function hotProducts(){
         $list = Product::where('on_sale','=',1)->take(10)->get();
         $list = ProductResource::collection($list);
+        return response(['status_code' => 0,'list' => $list]);
+    }
+
+    //商品详情
+    public static function product($id){
+        $product = Product::where('id','=',$id)->firstOrFail();
+        $product = new ProductResource($product);
+        $productSkus = ProductSkuResource::collection($product->skus);
+        $list['product'] = $product;
+        $list['productSkus'] = $productSkus;
         return response(['status_code' => 0,'list' => $list]);
     }
 }
