@@ -49,7 +49,7 @@ class CartItem extends Model
         return response(['status_code' => 0,'list' => $cart,'totalPage' => $totalPage,'total' => $total]);
     }
 
-    //从购物车种移除商品
+    //购物车移除商品
     public static function remove($id){
         $user = User::find(Auth::user()->id);
         $user->cartItems()->where('product_sku_id', $id)->delete();
