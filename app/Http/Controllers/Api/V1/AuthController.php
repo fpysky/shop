@@ -53,14 +53,15 @@ class AuthController extends Controller
      */
     public function register(RegisterFormRequest $request)
     {
-        $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
-        if($res['status_code'] == 0){
-            $args = $request->all();
-            return User::register($args);
-        }else{
-            return response($res,422);
-        }
-
+        $args = $request->all();
+        return User::register($args);
+//        $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
+//        if($res['status_code'] == 0){
+//            $args = $request->all();
+//            return User::register($args);
+//        }else{
+//            return response($res,422);
+//        }
     }
 
     /**
@@ -115,13 +116,15 @@ class AuthController extends Controller
      */
     public function login(LoginFormRequest $request)
     {
-        $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
-        if($res['status_code'] == 0){
-            $credentials = $request->only('email', 'password');
-            return User::login($credentials);
-        }else{
-            return response($res,422);
-        }
+        $credentials = $request->only('email', 'password');
+        return User::login($credentials);
+//        $res = $this->valiGeet($request->only('geetest_challenge', 'geetest_validate','geetest_seccode','geetest_status'));
+//        if($res['status_code'] == 0){
+//            $credentials = $request->only('email', 'password');
+//            return User::login($credentials);
+//        }else{
+//            return response($res,422);
+//        }
 
     }
     protected function valiGeet($args){

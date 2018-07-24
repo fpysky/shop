@@ -10,10 +10,10 @@ class RegisterFormRequest extends Request
             'name' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|max:10',
-            'geetest_challenge' => 'required',
-            'geetest_validate' => 'required',
-            'geetest_seccode' => 'required',
-            'geetest_status' => 'required',
+//            'geetest_challenge' => 'required',
+//            'geetest_validate' => 'required',
+//            'geetest_seccode' => 'required',
+//            'geetest_status' => 'required',
         ];
     }
 

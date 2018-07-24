@@ -54,8 +54,8 @@ class ProductController extends Controller
     }
 
     /**
-     * @api {get} /api/product/{id} 02.商品详情
-     * @apiName product
+     * @api {get} /api/products/{id} 02.商品详情
+     * @apiName products
      * @apiGroup 01Product
      *
      * @apiParam {Number} id             M   商品ID
@@ -118,11 +118,71 @@ class ProductController extends Controller
      *           }
      *       }
      */
-    public function product($id){
+    public function products($id){
         $id = intval($id,0);
         if($id == 0){
             return response(['status_code' => 1,'message' => 'ID不能为空'],422);
         }
-        return Product::product($id);
+        return Product::products($id);
+    }
+
+    /**
+     * @api {post} /api/products/{id}/favorite 03.收藏商品
+     * @apiName favorite
+     * @apiGroup 01Product
+     *
+     * @apiParam {Number} id             M   商品ID
+     *
+     * @apiErrorExample {json} 错误返回
+     *     HTTP/1.1 422
+     *     {
+     *      "status_code": 422,
+     *      "message": "ID不能为空"
+     *     }
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+     *       "status_code":0,
+     *      "message":'收藏成功'
+     *     }
+     * */
+    public function favor($id)
+    {
+        $id = intval($id,0);
+        if($id == 0){
+            return response(['status_code' => 1,'message' => 'ID不能为空'],422);
+        }
+        return Product::favor($id);
+    }
+
+    /**
+     * @api {delete} /api/products/{id}/favorite 04.取消收藏商品
+     * @apiName disfavor
+     * @apiGroup 01Product
+     *
+     * @apiParam {Number} id             M   商品ID
+     *
+     * @apiErrorExample {json} 错误返回
+     *     HTTP/1.1 422
+     *     {
+     *      "status_code": 422,
+     *      "message": "ID不能为空"
+     *     }
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+     *       "status_code":0,
+     *      "message":'取消收藏成功'
+     *     }
+     * */
+    public function disfavor($id)
+    {
+        $id = intval($id,0);
+        if($id == 0){
+            return response(['status_code' => 1,'message' => 'ID不能为空'],422);
+        }
+        return Product::disfavor($id);
     }
 }

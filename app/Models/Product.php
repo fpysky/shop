@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSkuResource;
+use Auth;
 
 class Product extends Model
 {
@@ -37,12 +38,36 @@ class Product extends Model
     }
 
     //商品详情
-    public static function product($id){
+    public static function products($id){
         $product = Product::where('id','=',$id)->firstOrFail();
         $product = new ProductResource($product);
         $productSkus = ProductSkuResource::collection($product->skus);
         $list['product'] = $product;
         $list['productSkus'] = $productSkus;
         return response(['status_code' => 0,'list' => $list]);
+    }
+
+    //收藏商品
+    public static function favor($id){
+        $user = User::find(Auth::user()->id);
+        if ($user->favoriteProducts()->find($id)) {
+            return response(['status_code' => 0,'message' => '收藏成功']);
+        }
+        $product = Product::where('id','=',$id)->first();
+        if(empty($product)){
+            return response(['status_code' => 1,'message' => '找不到该商品'],500);
+        }
+        $user->favoriteProducts()->attach($product);
+        return response(['status_code' => 0,'message' => '收藏成功']);
+    }
+    //取消收藏
+    public static function disfavor($id){
+        $user = User::find(Auth::user()->id);
+        $product = Product::where('id','=',$id)->first();
+        if(empty($product)){
+            return response(['status_code' => 1,'message' => '找不到该商品'],500);
+        }
+        $user->favoriteProducts()->detach($product);
+        return response(['status_code' => 0,'message' => '取消收藏成功']);
     }
 }

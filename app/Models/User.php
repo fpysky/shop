@@ -20,6 +20,13 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_favorite_products')
+            ->withTimestamps()
+            ->orderBy('user_favorite_products.created_at', 'desc');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -245,6 +245,88 @@ define({ "api": [
     "groupTitle": "商品分类"
   },
   {
+    "type": "delete",
+    "url": "/api/products/{id}/favorite",
+    "title": "04.取消收藏商品",
+    "name": "disfavor",
+    "group": "01Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品ID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"status_code\":0,\n \"message\":'取消收藏成功'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
+    "type": "post",
+    "url": "/api/products/{id}/favorite",
+    "title": "03.收藏商品",
+    "name": "favorite",
+    "group": "01Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品ID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"status_code\":0,\n \"message\":'收藏成功'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
     "type": "get",
     "url": "/api/hotProducts",
     "title": "01.热品推荐",
@@ -265,9 +347,9 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/product/{id}",
+    "url": "/api/products/{id}",
     "title": "02.商品详情",
-    "name": "product",
+    "name": "products",
     "group": "01Product",
     "parameter": {
       "fields": {
@@ -352,6 +434,13 @@ define({ "api": [
             "optional": false,
             "field": "400",
             "description": "<p>登陆错误</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "401",
+            "description": "<p>Unauthorized（未授权访问接口，指该接口的访问需要登陆）</p>"
           }
         ]
       }

@@ -9,10 +9,10 @@ class LoginFormRequest extends Request
         return [
             'email' => 'required|email',
             'password' => 'required',
-            'geetest_challenge' => 'required',
-            'geetest_validate' => 'required',
-            'geetest_seccode' => 'required',
-            'geetest_status' => 'required',
+//            'geetest_challenge' => 'required',
+//            'geetest_validate' => 'required',
+//            'geetest_seccode' => 'required',
+//            'geetest_status' => 'required',
         ];
     }
 

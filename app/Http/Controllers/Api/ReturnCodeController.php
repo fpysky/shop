@@ -25,6 +25,7 @@ class ReturnCodeController{
      * @apiParam {String} 500   请求错误
      * @apiParam {String} 422   请求参数错误
      * @apiParam {String} 400   登陆错误
+     * @apiParam {String} 401   Unauthorized（未授权访问接口，指该接口的访问需要登陆）
      * @apiVersion 0.1.0
      *
      * @apiErrorExample {json} 错误返回
