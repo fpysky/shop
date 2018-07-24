@@ -226,6 +226,125 @@
     "groupTitle": "用户接口"
   },
   {
+    "type": "post",
+    "url": "/api/cart",
+    "title": "01.加入购物车",
+    "name": "add",
+    "group": "01Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "sku_id",
+            "description": "<p>M   商品skuID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>M   商品数量</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"message\": \"加入购物车成功\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n      \"message\": \"验证不通过\",\n      \"errors\": {\n          \"sku_id\": [\"请选择商品\"],\n          \"amount\": [\"请输入商品数量\"]\n      },\n      \"status_code\": 422\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
+    "type": "get",
+    "url": "/api/cart",
+    "title": "02.购物车列表",
+    "name": "cart",
+    "group": "01Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>C   页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pSize",
+            "description": "<p>C   页面显示数量(默认15)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 1,\n              \"user_id\": 2,\n              \"product_sku_id\": 1,\n              \"amount\": 2\n          },\n          {\n              \"id\": 2,\n              \"user_id\": 2,\n              \"product_sku_id\": 2,\n              \"amount\": 3\n          }\n      ],\n      \"totalPage\": 1,\n      \"total\": 2\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
+    "type": "delete",
+    "url": "/api/cart/{id}",
+    "title": "02.购物车移除商品",
+    "name": "remove",
+    "group": "01Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品skuID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n     \"status_code\": 0,\n     \"message\": \"商品移除成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
     "type": "get",
     "url": "/api/productClassify",
     "title": "01.获取商品分类",
@@ -347,7 +466,7 @@
             "type": "Number",
             "optional": false,
             "field": "pSize",
-            "description": "<p>C   页面显示数量</p>"
+            "description": "<p>C   页面显示数量(默认15)</p>"
           }
         ]
       }
