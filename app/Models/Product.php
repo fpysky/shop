@@ -70,4 +70,14 @@ class Product extends Model
         $user->favoriteProducts()->detach($product);
         return response(['status_code' => 0,'message' => '取消收藏成功']);
     }
+
+    //收藏列表
+    public static function favorites($args){
+        $user = User::find(Auth::user()->id);
+        $products = $user->favoriteProducts()->paginate($args['pSize']);
+        $total = $products->total();
+        $products = ProductResource::collection($products);
+        $totalPage = ceil($total / $args['pSize']);
+        return response(['status_code' => 0,'list' => $products,'totalPage' => $totalPage,'total' => $total]);
+    }
 }

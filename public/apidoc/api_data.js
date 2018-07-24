@@ -328,6 +328,45 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/products/favorites",
+    "title": "04.收藏列表",
+    "name": "favorites",
+    "group": "01Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>C   页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pSize",
+            "description": "<p>C   页面显示数量</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 1,\n              \"title\": \"aliquid\",\n              \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 3,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"1018.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          }\n         ...\n      ],\n      \"totalPage\": 1,\n      \"total\": 1\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
+    "type": "get",
     "url": "/api/hotProducts",
     "title": "01.热品推荐",
     "name": "hotProducts",
