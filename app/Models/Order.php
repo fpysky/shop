@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\InvalidValidateException;
+use Auth;
+use Carbon\Carbon;
 
 class Order extends Model
 {

@@ -21,7 +21,7 @@ class OrdersController extends Controller
      * @apiName store
      * @apiGroup 01Order
      *
-     * @apiParam {Number} sku_id             M   商品skuID
+     * @apiParam {Number} address_id             M   商品skuID
      * @apiParam {Number} amount             M   商品数量
      *
      * @apiSuccessExample {json} 成功返回
@@ -46,6 +46,5 @@ class OrdersController extends Controller
     {
         $args = $request->all();
         return Order::store($args);
-
     }
 }

@@ -42,7 +42,7 @@ class CartItem extends Model
     //购物车列表
     public static function cart($args){
         $user = User::find(Auth::user()->id);
-        $cart = $user->cartItems()->paginate($args['pSize']);
+        $cart = $user->cartItems()->with(['productSku.product'])->paginate($args['pSize']);
         $total = $cart->total();
         $cart = CartItemResource::collection($cart);
         $totalPage = ceil($total / $args['pSize']);

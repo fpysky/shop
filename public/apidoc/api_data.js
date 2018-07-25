@@ -345,6 +345,54 @@ define({ "api": [
     "groupTitle": "购物车"
   },
   {
+    "type": "post",
+    "url": "/api/orders",
+    "title": "01.创建订单",
+    "name": "store",
+    "group": "01Order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "sku_id",
+            "description": "<p>M   商品skuID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>M   商品数量</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"message\": \"加入购物车成功\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n      \"message\": \"验证不通过\",\n      \"errors\": {\n          \"sku_id\": [\"请选择商品\"],\n          \"amount\": [\"请输入商品数量\"]\n      },\n      \"status_code\": 422\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/OrdersController.php",
+    "groupTitle": "订单"
+  },
+  {
     "type": "get",
     "url": "/api/productClassify",
     "title": "01.获取商品分类",
@@ -686,7 +734,7 @@ define({ "api": [
     "groupTitle": "用户地址接口"
   },
   {
-    "type": "post",
+    "type": "delete",
     "url": "/api/addresses/{address}",
     "title": "03.删除用户地址",
     "name": "destroy",

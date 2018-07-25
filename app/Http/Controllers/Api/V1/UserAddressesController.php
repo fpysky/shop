@@ -110,7 +110,7 @@ class UserAddressesController extends Controller
     }
 
     /**
-     * @api {post} /api/addresses/{address} 03.删除用户地址
+     * @api {delete} /api/addresses/{address} 03.删除用户地址
      * @apiName destroy
      * @apiGroup 01UserAddresses
      *
@@ -133,7 +133,7 @@ class UserAddressesController extends Controller
         $address = intval($address,0);
         if($address == 0){
             return response(['status_code' => 1,'message' => '地址ID不能为空(address)']);
-;        }
+        }
         return UserAddress::destroy($address);
     }
 }
