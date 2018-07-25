@@ -121,7 +121,7 @@ class Order extends Model
                     'contact_name'  => $address->contact_name,
                     'contact_phone' => $address->contact_phone,
                 ],
-                'remark'       => $args['remark'],
+                'remark'       => $args['remark'] ?? '',
                 'total_amount' => 0,
             ]);
             // 订单关联到当前用户
@@ -158,6 +158,6 @@ class Order extends Model
             return $order;
         });
 
-        return $order;
+        return response(['status_code' => 0,'message' => '创建订单成功','order' => $order]);
     }
 }
