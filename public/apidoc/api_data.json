@@ -447,6 +447,95 @@
     "groupTitle": "购物车"
   },
   {
+    "type": "get",
+    "url": "/api/orders",
+    "title": "02.订单列表",
+    "name": "orders",
+    "group": "04Order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>C   页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pSize",
+            "description": "<p>C   页面显示数量(默认15)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n     \"status_code\": 0,\n     \"list\": [\n          {\n             \"id\": 2,\n             \"no\": \"20180725073807750159\",\n             \"user_id\": 2,\n             \"address\": {\n                 \"address\": \"1111\",\n                 \"zip\": 1,\n                 \"contact_name\": \"1\",\n                 \"contact_phone\": \"1\"\n             },\n             \"total_amount\": \"6127.00\",\n             \"remark\": \"\",\n             \"paid_at\": null,\n             \"payment_method\": null,\n             \"payment_no\": null,\n             \"refund_status\": \"pending\",\n             \"refund_no\": null,\n             \"closed\": false,\n             \"reviewed\": false,\n             \"ship_status\": \"pending\",\n             \"ship_data\": null,\n             \"extra\": null,\n             \"items\": [\n                 {\n                     \"id\": 2,\n                     \"order_id\": 2,\n                     \"product_id\": 1,\n                     \"product_sku_id\": 1,\n                     \"amount\": 1,\n                     \"price\": \"6127.00\",\n                     \"rating\": null,\n                     \"review\": null,\n                     \"reviewed_at\": null,\n                     \"product\": {\n                         \"id\": 1,\n                         \"title\": \"aliquid\",\n                         \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n                         \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n                         \"on_sale\": true,\n                         \"classify_id\": 2,\n                         \"rating\": 3,\n                         \"sold_count\": 0,\n                         \"review_count\": 0,\n                         \"price\": \"1018.00\",\n                         \"created_at\": \"2018-07-23 09:08:19\",\n                         \"updated_at\": \"2018-07-23 09:08:19\"\n                     },\n                     \"product_sku\": {\n                         \"id\": 1,\n                         \"title\": \"vel\",\n                         \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                         \"price\": \"6127.00\",\n                         \"stock\": 13738,\n                         \"product_id\": 1,\n                         \"created_at\": \"2018-07-23 09:08:19\",\n                         \"updated_at\": \"2018-07-25 07:38:07\"\n                     }\n                 }\n             ],\n             \"created_at\": {\n                 \"date\": \"2018-07-25 07:38:07.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             },\n             \"updated_at\": {\n                 \"date\": \"2018-07-25 07:38:07.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             }\n         },\n         ...\n     ],\n     \"total\": 2,\n     \"totalPage\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n      \"message\": \"错误信息\",\n      \"status_code\": 500\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/OrdersController.php",
+    "groupTitle": "订单"
+  },
+  {
+    "type": "get",
+    "url": "/api/orders/{id}",
+    "title": "03.订单详情",
+    "name": "show",
+    "group": "04Order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>C   订单id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n     \"status_code\": 0,\n     \"list\": {\n             \"id\": 2,\n             \"no\": \"20180725073807750159\",\n             \"user_id\": 2,\n             \"address\": {\n                 \"address\": \"1111\",\n                 \"zip\": 1,\n                 \"contact_name\": \"1\",\n                 \"contact_phone\": \"1\"\n             },\n             \"total_amount\": \"6127.00\",\n             \"remark\": \"\",\n             \"paid_at\": null,\n             \"payment_method\": null,\n             \"payment_no\": null,\n             \"refund_status\": \"pending\",\n             \"refund_no\": null,\n             \"closed\": false,\n             \"reviewed\": false,\n             \"ship_status\": \"pending\",\n             \"ship_data\": null,\n             \"extra\": null,\n             \"items\": [\n                 {\n                     \"id\": 2,\n                     \"order_id\": 2,\n                     \"product_id\": 1,\n                     \"product_sku_id\": 1,\n                     \"amount\": 1,\n                     \"price\": \"6127.00\",\n                     \"rating\": null,\n                     \"review\": null,\n                     \"reviewed_at\": null,\n                     \"product\": {\n                         \"id\": 1,\n                         \"title\": \"aliquid\",\n                         \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n                         \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n                         \"on_sale\": true,\n                         \"classify_id\": 2,\n                         \"rating\": 3,\n                         \"sold_count\": 0,\n                         \"review_count\": 0,\n                         \"price\": \"1018.00\",\n                         \"created_at\": \"2018-07-23 09:08:19\",\n                         \"updated_at\": \"2018-07-23 09:08:19\"\n                     },\n                     \"product_sku\": {\n                         \"id\": 1,\n                         \"title\": \"vel\",\n                         \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                         \"price\": \"6127.00\",\n                         \"stock\": 13738,\n                         \"product_id\": 1,\n                         \"created_at\": \"2018-07-23 09:08:19\",\n                         \"updated_at\": \"2018-07-25 07:38:07\"\n                     }\n                 }\n             ],\n             \"created_at\": {\n                 \"date\": \"2018-07-25 07:38:07.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             },\n             \"updated_at\": {\n                 \"date\": \"2018-07-25 07:38:07.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             }\n     },\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n      \"message\": \"错误信息\",\n      \"status_code\": 500\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/OrdersController.php",
+    "groupTitle": "订单"
+  },
+  {
     "type": "post",
     "url": "/api/orders",
     "title": "01.创建订单",

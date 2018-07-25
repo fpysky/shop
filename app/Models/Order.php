@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\OrderResource;
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\InvalidValidateException;
 use Auth;
@@ -159,5 +160,27 @@ class Order extends Model
             return $order;
         });
         return $order;
+    }
+
+    public static function orders($args){
+        $orders = Order::query()
+            // 使用 with 方法预加载，避免N + 1问题
+            ->with(['items.product', 'items.productSku'])
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate($args['pSize']);
+        $total = $orders->total();
+        $totalPage = ceil($total / $args['pSize']);
+        $orders = OrderResource::collection($orders);
+        return response(['status_code' => 0,'list' => $orders,'total' => $total,'totalPage' => $totalPage]);
+    }
+
+    public static function show($id){
+        $order = Order::where('id','=',$id)->first();
+        if(empty($order)){
+            return response(['status_code' => 1,'message' => '找不到此订单']);
+        }
+        $order = $order->load(['items.productSku', 'items.product']);
+        return ['status_code' => 0,'list' => $order];
     }
 }

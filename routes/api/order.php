@@ -8,5 +8,7 @@ $api->version('v1', function ($api) {
         'namespace' => 'App\Http\Controllers\Api\V1'
     ], function ($api) {
         $api->post('orders','OrdersController@store');//创建订单
+        $api->get('orders','OrdersController@orders');//创建订单
+        $api->get('orders/{id}','OrdersController@show');//订单详情
     });
 });
