@@ -64,8 +64,8 @@ class UserAddress extends Model
         return response(['status_code' => 0,'message' => '操作成功']);
     }
 
-    public static function destroy($address){
-        $userAddress = UserAddress::where('id','=',$address)->firstOrFail();
+    public static function destroy($id){
+        $userAddress = UserAddress::where('id','=',$id)->firstOrFail();
         $userAddress->delete();
         return response(['status_code' => 0,'message' => '操作成功']);
     }

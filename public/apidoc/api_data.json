@@ -742,23 +742,10 @@
   },
   {
     "type": "delete",
-    "url": "/api/addresses/{address}",
-    "title": "03.删除用户地址",
+    "url": "/api/addresses/{id}",
+    "title": "04.删除用户地址",
     "name": "destroy",
     "group": "01UserAddresses",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>C   地址ID</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "examples": [
         {
@@ -784,7 +771,7 @@
   {
     "type": "post",
     "url": "/api/addresses",
-    "title": "02.用户地址添加&修改",
+    "title": "02.用户地址添加",
     "name": "store",
     "group": "01UserAddresses",
     "parameter": {
@@ -794,9 +781,85 @@
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>C   地址ID（0 =&gt; 新增）</p>"
+            "field": "province",
+            "description": "<p>M   省份</p>"
           },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "city",
+            "description": "<p>M   城市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "district",
+            "description": "<p>M   区域</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>M   详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "zip",
+            "description": "<p>M   邮编</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_name",
+            "description": "<p>M   收货人姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_phone",
+            "description": "<p>M   收货人手机号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n \"status_code\": 0,\n \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"province\": [\"省份不能为空\"],\n         \"city\": [\"城市不能为空\"],\n     },\n     \"status_code\": 422\n }\nHTTP/1.1 500\n{\n \"status_code\": 1,\n \"message\": \"错误信息\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/UserAddressesController.php",
+    "groupTitle": "用户地址接口"
+  },
+  {
+    "type": "put",
+    "url": "/api/addresses/{id}",
+    "title": "03.用户地址修改",
+    "name": "update",
+    "group": "01UserAddresses",
+    "parameter": {
+      "fields": {
+        "Parameter": [
           {
             "group": "Parameter",
             "type": "Number",
