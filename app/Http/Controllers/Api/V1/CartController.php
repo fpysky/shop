@@ -67,17 +67,35 @@ class CartController extends Controller
      *                   "id": 1,
      *                   "user_id": 2,
      *                   "product_sku_id": 1,
-     *                   "amount": 2
-     *               },
-     *               {
-     *                   "id": 2,
-     *                   "user_id": 2,
-     *                   "product_sku_id": 2,
-     *                   "amount": 3
+     *                   "amount": 1,
+     *                   "productSku": {
+     *                       "id": 1,
+     *                       "title": "vel",
+     *                       "description": "Rerum maiores eos eligendi dolorum qui corporis.",
+     *                       "price": "6127.00",
+     *                       "stock": 13740,
+     *                       "product_id": 1,
+     *                       "created_at": "2018-07-23 09:08:19",
+     *                       "updated_at": "2018-07-23 09:08:19",
+     *                       "product": {
+     *                           "id": 1,
+     *                           "title": "aliquid",
+     *                           "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                           "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                           "on_sale": true,
+     *                           "classify_id": 2,
+     *                           "rating": 3,
+     *                           "sold_count": 0,
+     *                           "review_count": 0,
+     *                           "price": "1018.00",
+     *                           "created_at": "2018-07-23 09:08:19",
+     *                           "updated_at": "2018-07-23 09:08:19"
+     *                       }
+     *                   }
      *               }
      *           ],
      *           "totalPage": 1,
-     *           "total": 2
+     *           "total": 1
      *       }
      * */
     public function cart(Request $request){
