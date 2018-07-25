@@ -12,14 +12,14 @@ use Dingo\Api\Exception\DeleteResourceFailedException;
 class UserAddressesController extends Controller
 {
     /**
-     * @apidefine 01UserAddresses
+     * @apidefine 07UserAddresses
      * 用户地址接口
      */
 
     /**
      * @api {get} /api/addresses 01.获取用户地址列表
      * @apiName addresses
-     * @apiGroup 01UserAddresses
+     * @apiGroup 07UserAddresses
      *
      * @apiParam {Number} pSize        M   单页显示记录条数（默认10）
      * @apiParam {Number} page         M   页码
@@ -69,7 +69,7 @@ class UserAddressesController extends Controller
     /**
      * @api {post} /api/addresses 02.用户地址添加
      * @apiName store
-     * @apiGroup 01UserAddresses
+     * @apiGroup 07UserAddresses
      *
      * @apiParam {Number} province       M   省份
      * @apiParam {Number} city           M   城市
@@ -111,7 +111,7 @@ class UserAddressesController extends Controller
     /**
      * @api {put} /api/addresses/{id} 03.用户地址修改
      * @apiName update
-     * @apiGroup 01UserAddresses
+     * @apiGroup 07UserAddresses
      *
      * @apiParam {Number} province       M   省份
      * @apiParam {Number} city           M   城市
@@ -153,7 +153,7 @@ class UserAddressesController extends Controller
     /**
      * @api {delete} /api/addresses/{id} 04.删除用户地址
      * @apiName destroy
-     * @apiGroup 01UserAddresses
+     * @apiGroup 07UserAddresses
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -175,6 +175,4 @@ class UserAddressesController extends Controller
         }
         return UserAddress::destroy($id);
     }
-
-
 }

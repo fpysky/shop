@@ -12,14 +12,14 @@ use App\Http\Controllers\Controller;
 class AuthController extends Controller
 {
     /**
-     * @apidefine 01Auth
+     * @apidefine 02Auth
      * 用户接口
      */
 
     /**
      * @api {post} /api/auth/register 01.注册
      * @apiName register
-     * @apiGroup 01Auth
+     * @apiGroup 02Auth
      *
      * @apiParam {String} name              M   用户名
      * @apiParam {String} email             M   电子邮箱
@@ -67,7 +67,7 @@ class AuthController extends Controller
     /**
      * @api {post} /api/auth/login 02.登陆
      * @apiName login
-     * @apiGroup 01Auth
+     * @apiGroup 02Auth
      *
      * @apiParam {String} email             M   电子邮箱
      * @apiParam {String} password          M   密码
@@ -161,7 +161,7 @@ class AuthController extends Controller
     /**
      * @api {get} /api/auth/user 03.获取用户信息
      * @apiName user
-     * @apiGroup 01Auth
+     * @apiGroup 02Auth
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -184,7 +184,7 @@ class AuthController extends Controller
     /**
      * @api {get} /api/auth/refresh 03.刷新token
      * @apiName refresh
-     * @apiGroup 01Auth
+     * @apiGroup 02Auth
      */
     public function refresh()
     {
@@ -196,7 +196,7 @@ class AuthController extends Controller
     /**
      * @api {post} /api/auth/logout 04.退出登陆
      * @apiName logout
-     * @apiGroup 01Auth
+     * @apiGroup 02Auth
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -217,7 +217,7 @@ class AuthController extends Controller
     /**
      * @api {post} /api/geetest_api_v1 05.极验配置信息返回
      * @apiName geetest_api_v1
-     * @apiGroup 01Auth
+     * @apiGroup 02Auth
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200

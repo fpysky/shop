@@ -12,14 +12,14 @@ use App\Models\ProductSku;
 class CartController extends Controller
 {
     /**
-     * @apidefine 01Cart
+     * @apidefine 03Cart
      * 购物车
      */
 
     /**
      * @api {post} /api/cart 01.加入购物车
      * @apiName add
-     * @apiGroup 01Cart
+     * @apiGroup 03Cart
      *
      * @apiParam {Number} sku_id             M   商品skuID
      * @apiParam {Number} amount             M   商品数量
@@ -53,7 +53,7 @@ class CartController extends Controller
     /**
      * @api {get} /api/cart 02.购物车列表
      * @apiName cart
-     * @apiGroup 01Cart
+     * @apiGroup 03Cart
      *
      * @apiParam {Number} page                 C   页码
      * @apiParam {Number} pSize                C   页面显示数量(默认15)
@@ -108,7 +108,7 @@ class CartController extends Controller
     /**
      * @api {delete} /api/cart/{id} 02.购物车移除商品
      * @apiName remove
-     * @apiGroup 01Cart
+     * @apiGroup 03Cart
      *
      * @apiParam {Number} id             M   商品skuID
      *

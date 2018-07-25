@@ -8,14 +8,14 @@ use App\Http\Controllers\Controller;
 class ProductClassifyController extends Controller
 {
     /**
-     * @apidefine 01ProductClassify
+     * @apidefine 05ProductClassify
      * 商品分类
      */
 
     /**
      * @api {get} /api/productClassify 01.获取商品分类
      * @apiName productClassify
-     * @apiGroup 01ProductClassify
+     * @apiGroup 05ProductClassify
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200

@@ -1,606 +1,6 @@
 [
   {
     "type": "post",
-    "url": "/api/geetest_api_v1",
-    "title": "05.极验配置信息返回",
-    "name": "geetest_api_v1",
-    "group": "01Auth",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n     \"success\": 1,\n     \"gt\": \"9af3aa9e204402036ff03ca65b64621a\",\n     \"challenge\": \"30d33f3d3cd369458f7831928945f843\",\n     \"new_captcha\": 1,\n     \"status\": 1\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "post",
-    "url": "/api/auth/login",
-    "title": "02.登陆",
-    "name": "login",
-    "group": "01Auth",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>M   电子邮箱</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>M   密码</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_challenge",
-            "description": "<p>M   极验参数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_validate",
-            "description": "<p>M   极验参数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_seccode",
-            "description": "<p>M   极验参数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_status",
-            "description": "<p>M   极验参数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"message\": \"\",\n  \"status_code\":0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"name\": [\"用户名不能为空\"],\n         \"email\": [\"邮箱不能为空\"],\n         \"password\": [\"密码不能为空\"],\n         \"geetest_challenge\": [\"请点击以滑动校验验证码\"],\n         \"geetest_validate\": [\"请点击以滑动校验验证码\"],\n         \"geetest_seccode\": [\"请点击以滑动校验验证码\"],\n         \"geetest_status\": [\"请点击以滑动校验验证码\"]\n     },\n     \"status_code\": 422\n }\n HTTP/1.1 422（极验验证不通过）\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"error\": [\"验证失败请重试\"],\n     },\n     \"status_code\": 422\n }\nHTTP/1.1 400\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"error\": [\"邮箱或密码不正确\"],\n     },\n     \"status_code\": 400\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "post",
-    "url": "/api/auth/logout",
-    "title": "04.退出登陆",
-    "name": "logout",
-    "group": "01Auth",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"message\":\"退出成功\",\n  \"status_code\":0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "get",
-    "url": "/api/auth/refresh",
-    "title": "03.刷新token",
-    "name": "refresh",
-    "group": "01Auth",
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "post",
-    "url": "/api/auth/register",
-    "title": "01.注册",
-    "name": "register",
-    "group": "01Auth",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>M   用户名</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>M   电子邮箱</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>M   密码</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_challenge",
-            "description": "<p>M   极验参数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_validate",
-            "description": "<p>M   极验参数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_seccode",
-            "description": "<p>M   极验参数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "geetest_status",
-            "description": "<p>M   极验参数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"message\": \"\",\n  \"status_code\":0,\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"name\": [\"用户名不能为空\"],\n         \"email\": [\"邮箱不能为空\"],\n         \"password\": [\"密码不能为空\"],\n         \"geetest_challenge\": [\"请点击以滑动校验验证码\"],\n         \"geetest_validate\": [\"请点击以滑动校验验证码\"],\n         \"geetest_seccode\": [\"请点击以滑动校验验证码\"],\n         \"geetest_status\": [\"请点击以滑动校验验证码\"]\n     },\n     \"status_code\": 422\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "get",
-    "url": "/api/auth/user",
-    "title": "03.获取用户信息",
-    "name": "user",
-    "group": "01Auth",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"data\":{\n     \"id\":1,\n     \"name\":\"a\",\n     \"email\":\"a@a.com\",\n     \"created_at\":\"2018-07-10 02:27:51\",\n     \"updated_at\":\"2018-07-10 02:27:51\"\n  },\n  \"status_code\":0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "post",
-    "url": "/api/cart",
-    "title": "01.加入购物车",
-    "name": "add",
-    "group": "01Cart",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "sku_id",
-            "description": "<p>M   商品skuID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "amount",
-            "description": "<p>M   商品数量</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"message\": \"加入购物车成功\"\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n      \"message\": \"验证不通过\",\n      \"errors\": {\n          \"sku_id\": [\"请选择商品\"],\n          \"amount\": [\"请输入商品数量\"]\n      },\n      \"status_code\": 422\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/CartController.php",
-    "groupTitle": "购物车"
-  },
-  {
-    "type": "get",
-    "url": "/api/cart",
-    "title": "02.购物车列表",
-    "name": "cart",
-    "group": "01Cart",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "page",
-            "description": "<p>C   页码</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "pSize",
-            "description": "<p>C   页面显示数量(默认15)</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 1,\n              \"user_id\": 2,\n              \"product_sku_id\": 1,\n              \"amount\": 1,\n              \"productSku\": {\n                  \"id\": 1,\n                  \"title\": \"vel\",\n                  \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                  \"price\": \"6127.00\",\n                  \"stock\": 13740,\n                  \"product_id\": 1,\n                  \"created_at\": \"2018-07-23 09:08:19\",\n                  \"updated_at\": \"2018-07-23 09:08:19\",\n                  \"product\": {\n                      \"id\": 1,\n                      \"title\": \"aliquid\",\n                      \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n                      \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n                      \"on_sale\": true,\n                      \"classify_id\": 2,\n                      \"rating\": 3,\n                      \"sold_count\": 0,\n                      \"review_count\": 0,\n                      \"price\": \"1018.00\",\n                      \"created_at\": \"2018-07-23 09:08:19\",\n                      \"updated_at\": \"2018-07-23 09:08:19\"\n                  }\n              }\n          }\n      ],\n      \"totalPage\": 1,\n      \"total\": 1\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/CartController.php",
-    "groupTitle": "购物车"
-  },
-  {
-    "type": "delete",
-    "url": "/api/cart/{id}",
-    "title": "02.购物车移除商品",
-    "name": "remove",
-    "group": "01Cart",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>M   商品skuID</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n     \"status_code\": 0,\n     \"message\": \"商品移除成功\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/CartController.php",
-    "groupTitle": "购物车"
-  },
-  {
-    "type": "post",
-    "url": "/api/orders",
-    "title": "01.创建订单",
-    "name": "store",
-    "group": "01Order",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "address_id",
-            "description": "<p>M   商品skuID</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Array",
-            "optional": false,
-            "field": "items",
-            "description": "<p>M   商品数量</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "传参示例:",
-          "content": "{\n      \"address_id\":2,\n      \"items\":[\n          {\n              \"sku_id\":1,\n              \"amount\":1\n          }\n      ]\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"message\": \"创建订单成功\",\n      \"order\": {\n          \"address\": {\n              \"address\": \"1111\",\n              \"zip\": 1,\n              \"contact_name\": \"1\",\n              \"contact_phone\": \"1\"\n          },\n          \"remark\": \"\",\n          \"total_amount\": 6127,\n          \"user_id\": 2,\n          \"no\": \"20180725073807750159\",\n          \"updated_at\": \"2018-07-25 07:38:07\",\n          \"created_at\": \"2018-07-25 07:38:07\",\n          \"id\": 2,\n          \"user\": {\n              \"id\": 2,\n              \"name\": \"aa\",\n              \"email\": \"aa@aa.com\",\n              \"created_at\": \"2018-07-24 07:02:50\",\n              \"updated_at\": \"2018-07-24 07:02:50\"\n          }\n      }\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n      \"message\": \"验证不通过\",\n      \"errors\": {\n          \"address_id\": [\"用户地址ID不能为空\"],\n          \"items\": [\"items 不能为空。\"]\n      },\n      \"status_code\": 422\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/OrdersController.php",
-    "groupTitle": "订单"
-  },
-  {
-    "type": "get",
-    "url": "/api/productClassify",
-    "title": "01.获取商品分类",
-    "name": "productClassify",
-    "group": "01ProductClassify",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "  HTTP/1.1 200\n  {\n       \"status_code\": 0,\n       \"list\": [\n            {\n                \"id\": 1,\n                \"name\": \"手机\",\n                \"pid\": 0,\n                \"created_at\": null,\n                \"updated_at\": null,\n                \"_child\": [\n                    {\n                        \"id\": 2,\n                        \"pid\": 1,\n                        \"name\": \"魅族手机\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    },\n                    {\n                        \"id\": 3,\n                        \"pid\": 1,\n                        \"name\": \"魅蓝手机\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    }\n                  ]\n               },\n               ...\n           ]\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductClassifyController.php",
-    "groupTitle": "商品分类"
-  },
-  {
-    "type": "delete",
-    "url": "/api/products/{id}/favorite",
-    "title": "04.取消收藏商品",
-    "name": "disfavor",
-    "group": "01Product",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>M   商品ID</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"status_code\":0,\n \"message\":'取消收藏成功'\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
-    "groupTitle": "商品"
-  },
-  {
-    "type": "post",
-    "url": "/api/products/{id}/favorite",
-    "title": "03.收藏商品",
-    "name": "favorite",
-    "group": "01Product",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>M   商品ID</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"status_code\":0,\n \"message\":'收藏成功'\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
-    "groupTitle": "商品"
-  },
-  {
-    "type": "get",
-    "url": "/api/products/favorites",
-    "title": "04.收藏列表",
-    "name": "favorites",
-    "group": "01Product",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "page",
-            "description": "<p>C   页码</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "pSize",
-            "description": "<p>C   页面显示数量(默认15)</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 1,\n              \"title\": \"aliquid\",\n              \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 3,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"1018.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          }\n         ...\n      ],\n      \"totalPage\": 1,\n      \"total\": 1\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
-    "groupTitle": "商品"
-  },
-  {
-    "type": "get",
-    "url": "/api/hotProducts",
-    "title": "01.热品推荐",
-    "name": "hotProducts",
-    "group": "01Product",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "    HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 4,\n              \"title\": \"nulla\",\n              \"description\": \"Alias sapiente reiciendis est quis.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/pa7DrV43Mw.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 1,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"324.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n     ...\n     ],\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
-    "groupTitle": "商品"
-  },
-  {
-    "type": "get",
-    "url": "/api/products/{id}",
-    "title": "02.商品详情",
-    "name": "products",
-    "group": "01Product",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>M   商品ID</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"list\": {\n          \"product\": {\n              \"id\": 1,\n              \"title\": \"aliquid\",\n              \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 3,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"1018.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n          \"productSkus\": [\n              {\n                  \"id\": 1,\n                  \"title\": \"vel\",\n                  \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                  \"price\": \"6127.00\",\n                  \"stock\": 13740,\n                  \"product_id\": 1,\n                  \"created_at\": {\n                      \"date\": \"2018-07-23 09:08:19.000000\",\n                      \"timezone_type\": 3,\n                      \"timezone\": \"UTC\"\n                  },\n                  \"updated_at\": {\n                      \"date\": \"2018-07-23 09:08:19.000000\",\n                      \"timezone_type\": 3,\n                      \"timezone\": \"UTC\"\n                  }\n              },\n          ...\n          ]\n      }\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
-    "groupTitle": "商品"
-  },
-  {
-    "type": "post",
     "url": "/api/global",
     "title": "1.全局返回码",
     "description": "<p>全局返回码</p>",
@@ -702,11 +102,611 @@
     "name": "PostHeader"
   },
   {
+    "type": "post",
+    "url": "/api/geetest_api_v1",
+    "title": "05.极验配置信息返回",
+    "name": "geetest_api_v1",
+    "group": "02Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n     \"success\": 1,\n     \"gt\": \"9af3aa9e204402036ff03ca65b64621a\",\n     \"challenge\": \"30d33f3d3cd369458f7831928945f843\",\n     \"new_captcha\": 1,\n     \"status\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "post",
+    "url": "/api/auth/login",
+    "title": "02.登陆",
+    "name": "login",
+    "group": "02Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>M   电子邮箱</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>M   密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_challenge",
+            "description": "<p>M   极验参数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_validate",
+            "description": "<p>M   极验参数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_seccode",
+            "description": "<p>M   极验参数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_status",
+            "description": "<p>M   极验参数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\": \"\",\n  \"status_code\":0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"name\": [\"用户名不能为空\"],\n         \"email\": [\"邮箱不能为空\"],\n         \"password\": [\"密码不能为空\"],\n         \"geetest_challenge\": [\"请点击以滑动校验验证码\"],\n         \"geetest_validate\": [\"请点击以滑动校验验证码\"],\n         \"geetest_seccode\": [\"请点击以滑动校验验证码\"],\n         \"geetest_status\": [\"请点击以滑动校验验证码\"]\n     },\n     \"status_code\": 422\n }\n HTTP/1.1 422（极验验证不通过）\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"error\": [\"验证失败请重试\"],\n     },\n     \"status_code\": 422\n }\nHTTP/1.1 400\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"error\": [\"邮箱或密码不正确\"],\n     },\n     \"status_code\": 400\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "post",
+    "url": "/api/auth/logout",
+    "title": "04.退出登陆",
+    "name": "logout",
+    "group": "02Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\":\"退出成功\",\n  \"status_code\":0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/auth/refresh",
+    "title": "03.刷新token",
+    "name": "refresh",
+    "group": "02Auth",
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "post",
+    "url": "/api/auth/register",
+    "title": "01.注册",
+    "name": "register",
+    "group": "02Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>M   用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>M   电子邮箱</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>M   密码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_challenge",
+            "description": "<p>M   极验参数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_validate",
+            "description": "<p>M   极验参数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_seccode",
+            "description": "<p>M   极验参数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geetest_status",
+            "description": "<p>M   极验参数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\": \"\",\n  \"status_code\":0,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n     \"message\": \"验证不通过\",\n     \"errors\": {\n         \"name\": [\"用户名不能为空\"],\n         \"email\": [\"邮箱不能为空\"],\n         \"password\": [\"密码不能为空\"],\n         \"geetest_challenge\": [\"请点击以滑动校验验证码\"],\n         \"geetest_validate\": [\"请点击以滑动校验验证码\"],\n         \"geetest_seccode\": [\"请点击以滑动校验验证码\"],\n         \"geetest_status\": [\"请点击以滑动校验验证码\"]\n     },\n     \"status_code\": 422\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/auth/user",
+    "title": "03.获取用户信息",
+    "name": "user",
+    "group": "02Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"data\":{\n     \"id\":1,\n     \"name\":\"a\",\n     \"email\":\"a@a.com\",\n     \"created_at\":\"2018-07-10 02:27:51\",\n     \"updated_at\":\"2018-07-10 02:27:51\"\n  },\n  \"status_code\":0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/AuthController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "post",
+    "url": "/api/cart",
+    "title": "01.加入购物车",
+    "name": "add",
+    "group": "03Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "sku_id",
+            "description": "<p>M   商品skuID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>M   商品数量</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"message\": \"加入购物车成功\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n      \"message\": \"验证不通过\",\n      \"errors\": {\n          \"sku_id\": [\"请选择商品\"],\n          \"amount\": [\"请输入商品数量\"]\n      },\n      \"status_code\": 422\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
+    "type": "get",
+    "url": "/api/cart",
+    "title": "02.购物车列表",
+    "name": "cart",
+    "group": "03Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>C   页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pSize",
+            "description": "<p>C   页面显示数量(默认15)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 1,\n              \"user_id\": 2,\n              \"product_sku_id\": 1,\n              \"amount\": 1,\n              \"productSku\": {\n                  \"id\": 1,\n                  \"title\": \"vel\",\n                  \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                  \"price\": \"6127.00\",\n                  \"stock\": 13740,\n                  \"product_id\": 1,\n                  \"created_at\": \"2018-07-23 09:08:19\",\n                  \"updated_at\": \"2018-07-23 09:08:19\",\n                  \"product\": {\n                      \"id\": 1,\n                      \"title\": \"aliquid\",\n                      \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n                      \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n                      \"on_sale\": true,\n                      \"classify_id\": 2,\n                      \"rating\": 3,\n                      \"sold_count\": 0,\n                      \"review_count\": 0,\n                      \"price\": \"1018.00\",\n                      \"created_at\": \"2018-07-23 09:08:19\",\n                      \"updated_at\": \"2018-07-23 09:08:19\"\n                  }\n              }\n          }\n      ],\n      \"totalPage\": 1,\n      \"total\": 1\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
+    "type": "delete",
+    "url": "/api/cart/{id}",
+    "title": "02.购物车移除商品",
+    "name": "remove",
+    "group": "03Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品skuID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n     \"status_code\": 0,\n     \"message\": \"商品移除成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
+    "type": "post",
+    "url": "/api/orders",
+    "title": "01.创建订单",
+    "name": "store",
+    "group": "04Order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "address_id",
+            "description": "<p>M   商品skuID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "items",
+            "description": "<p>M   商品数量</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "传参示例:",
+          "content": "{\n      \"address_id\":2,\n      \"items\":[\n          {\n              \"sku_id\":1,\n              \"amount\":1\n          }\n      ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"message\": \"创建订单成功\",\n      \"order\": {\n          \"address\": {\n              \"address\": \"1111\",\n              \"zip\": 1,\n              \"contact_name\": \"1\",\n              \"contact_phone\": \"1\"\n          },\n          \"remark\": \"\",\n          \"total_amount\": 6127,\n          \"user_id\": 2,\n          \"no\": \"20180725073807750159\",\n          \"updated_at\": \"2018-07-25 07:38:07\",\n          \"created_at\": \"2018-07-25 07:38:07\",\n          \"id\": 2,\n          \"user\": {\n              \"id\": 2,\n              \"name\": \"aa\",\n              \"email\": \"aa@aa.com\",\n              \"created_at\": \"2018-07-24 07:02:50\",\n              \"updated_at\": \"2018-07-24 07:02:50\"\n          }\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n      \"message\": \"验证不通过\",\n      \"errors\": {\n          \"address_id\": [\"用户地址ID不能为空\"],\n          \"items\": [\"items 不能为空。\"]\n      },\n      \"status_code\": 422\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/OrdersController.php",
+    "groupTitle": "订单"
+  },
+  {
+    "type": "get",
+    "url": "/api/productClassify",
+    "title": "01.获取商品分类",
+    "name": "productClassify",
+    "group": "05ProductClassify",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "  HTTP/1.1 200\n  {\n       \"status_code\": 0,\n       \"list\": [\n            {\n                \"id\": 1,\n                \"name\": \"手机\",\n                \"pid\": 0,\n                \"created_at\": null,\n                \"updated_at\": null,\n                \"_child\": [\n                    {\n                        \"id\": 2,\n                        \"pid\": 1,\n                        \"name\": \"魅族手机\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    },\n                    {\n                        \"id\": 3,\n                        \"pid\": 1,\n                        \"name\": \"魅蓝手机\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    }\n                  ]\n               },\n               ...\n           ]\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductClassifyController.php",
+    "groupTitle": "商品分类"
+  },
+  {
+    "type": "delete",
+    "url": "/api/products/{id}/favorite",
+    "title": "04.取消收藏商品",
+    "name": "disfavor",
+    "group": "06Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品ID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"status_code\":0,\n \"message\":'取消收藏成功'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
+    "type": "post",
+    "url": "/api/products/{id}/favorite",
+    "title": "03.收藏商品",
+    "name": "favorite",
+    "group": "06Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品ID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"status_code\":0,\n \"message\":'收藏成功'\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
+    "type": "get",
+    "url": "/api/products/favorites",
+    "title": "04.收藏列表",
+    "name": "favorites",
+    "group": "06Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>C   页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "pSize",
+            "description": "<p>C   页面显示数量(默认15)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 1,\n              \"title\": \"aliquid\",\n              \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 3,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"1018.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          }\n         ...\n      ],\n      \"totalPage\": 1,\n      \"total\": 1\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
+    "type": "get",
+    "url": "/api/hotProducts",
+    "title": "01.热品推荐",
+    "name": "hotProducts",
+    "group": "06Product",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "    HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 4,\n              \"title\": \"nulla\",\n              \"description\": \"Alias sapiente reiciendis est quis.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/pa7DrV43Mw.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 1,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"324.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n     ...\n     ],\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
+    "type": "get",
+    "url": "/api/products/{id}",
+    "title": "02.商品详情",
+    "name": "products",
+    "group": "06Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品ID</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"list\": {\n          \"product\": {\n              \"id\": 1,\n              \"title\": \"aliquid\",\n              \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 3,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"1018.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n          \"productSkus\": [\n              {\n                  \"id\": 1,\n                  \"title\": \"vel\",\n                  \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                  \"price\": \"6127.00\",\n                  \"stock\": 13740,\n                  \"product_id\": 1,\n                  \"created_at\": {\n                      \"date\": \"2018-07-23 09:08:19.000000\",\n                      \"timezone_type\": 3,\n                      \"timezone\": \"UTC\"\n                  },\n                  \"updated_at\": {\n                      \"date\": \"2018-07-23 09:08:19.000000\",\n                      \"timezone_type\": 3,\n                      \"timezone\": \"UTC\"\n                  }\n              },\n          ...\n          ]\n      }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "商品"
+  },
+  {
     "type": "get",
     "url": "/api/addresses",
     "title": "01.获取用户地址列表",
     "name": "addresses",
-    "group": "01UserAddresses",
+    "group": "07UserAddresses",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -745,7 +745,7 @@
     "url": "/api/addresses/{id}",
     "title": "04.删除用户地址",
     "name": "destroy",
-    "group": "01UserAddresses",
+    "group": "07UserAddresses",
     "success": {
       "examples": [
         {
@@ -773,7 +773,7 @@
     "url": "/api/addresses",
     "title": "02.用户地址添加",
     "name": "store",
-    "group": "01UserAddresses",
+    "group": "07UserAddresses",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -856,7 +856,7 @@
     "url": "/api/addresses/{id}",
     "title": "03.用户地址修改",
     "name": "update",
-    "group": "01UserAddresses",
+    "group": "07UserAddresses",
     "parameter": {
       "fields": {
         "Parameter": [

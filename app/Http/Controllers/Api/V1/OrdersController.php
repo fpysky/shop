@@ -12,14 +12,14 @@ use App\Http\Controllers\Controller;
 class OrdersController extends Controller
 {
     /**
-     * @apidefine 01Order
+     * @apidefine 04Order
      * 订单
      */
 
     /**
      * @api {post} /api/orders 01.创建订单
      * @apiName store
-     * @apiGroup 01Order
+     * @apiGroup 04Order
      *
      * @apiParam {Number} address_id     M   商品skuID
      * @apiParam {Array} items           M   商品数量

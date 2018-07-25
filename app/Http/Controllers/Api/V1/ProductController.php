@@ -9,14 +9,14 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
     /**
-     * @apidefine 01Product
+     * @apidefine 06Product
      * 商品
      */
 
     /**
      * @api {get} /api/hotProducts 01.热品推荐
      * @apiName hotProducts
-     * @apiGroup 01Product
+     * @apiGroup 06Product
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -56,7 +56,7 @@ class ProductController extends Controller
     /**
      * @api {get} /api/products/{id} 02.商品详情
      * @apiName products
-     * @apiGroup 01Product
+     * @apiGroup 06Product
      *
      * @apiParam {Number} id             M   商品ID
      *
@@ -129,7 +129,7 @@ class ProductController extends Controller
     /**
      * @api {post} /api/products/{id}/favorite 03.收藏商品
      * @apiName favorite
-     * @apiGroup 01Product
+     * @apiGroup 06Product
      *
      * @apiParam {Number} id             M   商品ID
      *
@@ -159,7 +159,7 @@ class ProductController extends Controller
     /**
      * @api {delete} /api/products/{id}/favorite 04.取消收藏商品
      * @apiName disfavor
-     * @apiGroup 01Product
+     * @apiGroup 06Product
      *
      * @apiParam {Number} id             M   商品ID
      *
@@ -189,7 +189,7 @@ class ProductController extends Controller
     /**
      * @api {get} /api/products/favorites 04.收藏列表
      * @apiName favorites
-     * @apiGroup 01Product
+     * @apiGroup 06Product
      *
      * @apiParam {Number} page                 C   页码
      * @apiParam {Number} pSize                C   页面显示数量(默认15)
