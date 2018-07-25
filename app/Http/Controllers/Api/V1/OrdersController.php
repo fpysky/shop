@@ -78,6 +78,8 @@ class OrdersController extends Controller
     public function store(OrderRequest $request)
     {
         $args = $request->all();
-        return Order::store($args);
+        $order =  Order::store($args);
+        $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
+        return response(['status_code' => 0,'message' => '创建订单成功','order' => $order]);
     }
 }

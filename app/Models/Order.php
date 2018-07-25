@@ -155,9 +155,9 @@ class Order extends Model
             $skuIds = collect($args['items'])->pluck('sku_id');
             $user->cartItems()->whereIn('product_sku_id', $skuIds)->delete();
 
+
             return $order;
         });
-
-        return response(['status_code' => 0,'message' => '创建订单成功','order' => $order]);
+        return $order;
     }
 }
