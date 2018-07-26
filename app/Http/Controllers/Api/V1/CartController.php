@@ -165,11 +165,11 @@ class CartController extends Controller
     }
 
     /**
-     * @api {delete} /api/cart/settle 03.结算
+     * @api {post} /api/cart/settle 03.结算
      * @apiName settle
      * @apiGroup 03Cart
      *
-     * @apiParam {Number} id             M   商品skuID
+     * @apiParam {Number} id             M   购物车商品ID
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -178,7 +178,8 @@ class CartController extends Controller
      *          "message": "商品移除成功"
      *     }
      * */
-    public function settle(){
-
+    public function settle(Request $request){
+        $id = $request->input('id',0);
+        $id = intval('');
     }
 }
