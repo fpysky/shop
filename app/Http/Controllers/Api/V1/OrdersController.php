@@ -269,11 +269,11 @@ class OrdersController extends Controller
      *      }
      *
      * @apiErrorExample {json} 错误返回
-     *     HTTP/1.1 422
+     *     HTTP/1.1 404
      *     {
-     *           "message": "错误信息",
-     *           "status_code": 500
-     *       }
+     *           "message": "找不到此订单",
+     *           "status_code": 404
+     *     }
      */
     public function show($id){
         $id = intval($id,0);

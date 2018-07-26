@@ -140,6 +140,12 @@ class ProductController extends Controller
      *      "message": "ID不能为空"
      *     }
      *
+     *     HTTP/1.1 404
+     *     {
+     *      "status_code": 404,
+     *      "message": "找不到该商品"
+     *     }
+     *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
      *     {
@@ -168,6 +174,11 @@ class ProductController extends Controller
      *     {
      *      "status_code": 422,
      *      "message": "ID不能为空"
+     *     }
+     *     HTTP/1.1 404
+     *     {
+     *      "status_code": 404,
+     *      "message": "找不到该商品"
      *     }
      *
      * @apiSuccessExample {json} 成功返回

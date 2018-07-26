@@ -162,16 +162,16 @@ class UserAddressesController extends Controller
      *      "message": "操作成功"
      *     }
      * @apiErrorExample {json} 错误返回
-     *     HTTP/1.1 200
+     *     HTTP/1.1 422
      *     {
-     *      "status_code": 500,
-     *      "message": "错误信息"
+     *      "status_code": 422,
+     *      "message": "地址ID不能为空(address)"
      *     }
      */
     public function destroy($id){
         $id = intval($id,0);
         if($id == 0){
-            return response(['status_code' => 1,'message' => '地址ID不能为空(address)']);
+            return response(['status_code' => 1,'message' => '地址ID不能为空(address)'],422);
         }
         return UserAddress::destroy($id);
     }

@@ -54,6 +54,13 @@ define({ "api": [
             "optional": false,
             "field": "401",
             "description": "<p>Unauthorized（未授权访问接口，指该接口的访问需要登陆）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "404",
+            "description": "<p>找不到资源</p>"
           }
         ]
       }
@@ -447,6 +454,86 @@ define({ "api": [
     "groupTitle": "购物车"
   },
   {
+    "type": "delete",
+    "url": "/api/cart/settle",
+    "title": "03.结算",
+    "name": "settle",
+    "group": "03Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   商品skuID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n     \"status_code\": 0,\n     \"message\": \"商品移除成功\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
+    "type": "put",
+    "url": "/api/cart/{id}",
+    "title": "02.购物车更新商品",
+    "name": "update",
+    "group": "03Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   购物车商品ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "amount",
+            "description": "<p>M   购物车商品数量</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n     \"status_code\": 0,\n     \"message\": \"购物车商品更新成功\",\n     \"amount\": 10\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 409\n{\n     \"status_code\": 1,\n     \"message\": \"库存不足\"\n}\n HTTP/1.1 422\n{\n     \"status_code\": 1,\n     \"message\": \"找不到该购物车商品\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/CartController.php",
+    "groupTitle": "购物车"
+  },
+  {
     "type": "get",
     "url": "/api/orders",
     "title": "02.订单列表",
@@ -526,7 +613,7 @@ define({ "api": [
       "examples": [
         {
           "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n      \"message\": \"错误信息\",\n      \"status_code\": 500\n  }",
+          "content": "HTTP/1.1 404\n{\n      \"message\": \"找不到此订单\",\n      \"status_code\": 404\n}",
           "type": "json"
         }
       ]
@@ -632,7 +719,7 @@ define({ "api": [
       "examples": [
         {
           "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}\nHTTP/1.1 404\n{\n \"status_code\": 404,\n \"message\": \"找不到该商品\"\n}",
           "type": "json"
         }
       ]
@@ -673,7 +760,7 @@ define({ "api": [
       "examples": [
         {
           "title": "错误返回",
-          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"ID不能为空\"\n}\n\nHTTP/1.1 404\n{\n \"status_code\": 404,\n \"message\": \"找不到该商品\"\n}",
           "type": "json"
         }
       ]
@@ -848,7 +935,7 @@ define({ "api": [
       "examples": [
         {
           "title": "错误返回",
-          "content": "HTTP/1.1 200\n{\n \"status_code\": 500,\n \"message\": \"错误信息\"\n}",
+          "content": "HTTP/1.1 422\n{\n \"status_code\": 422,\n \"message\": \"地址ID不能为空(address)\"\n}",
           "type": "json"
         }
       ]

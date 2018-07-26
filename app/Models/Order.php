@@ -178,7 +178,7 @@ class Order extends Model
     public static function show($id){
         $order = Order::where('id','=',$id)->with(['items.product', 'items.productSku'])->first();
         if(empty($order)){
-            return response(['status_code' => 1,'message' => '找不到此订单']);
+            return response(['status_code' => 1,'message' => '找不到此订单'],404);
         }
         $order = new OrderResource($order);//$order->load(['items.productSku', 'items.product']);
         return ['status_code' => 0,'list' => $order];

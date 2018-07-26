@@ -55,4 +55,19 @@ class CartItem extends Model
         $user->cartItems()->where('product_sku_id', $id)->delete();
         return response(['status_code' => 0,'message' => '商品移除成功']);
     }
+
+    //更新购物车商品数量
+    public static function updateAmount($args){
+        $item = CartItem::where('id','=',$args['id'])->first();
+        if(empty($item)){
+            return response(['status_code' => 1,'message' => '找不到该购物车商品'],404);
+        }
+        $productSku = ProductSku::where('id','=',$item->product_sku_id)->firstOrFail();
+        if($productSku->stock < $args['amount']){
+            return response(['status_code' => 1,'message' => '库存不足'],409);
+        }
+        $item->amount = $args['amount'];
+        $item->save();
+        return response(['status_code' => 0,'message' => '购物车商品更新成功','amount' => $item->amount]);
+    }
 }

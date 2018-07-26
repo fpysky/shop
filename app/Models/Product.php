@@ -55,7 +55,7 @@ class Product extends Model
         }
         $product = Product::where('id','=',$id)->first();
         if(empty($product)){
-            return response(['status_code' => 1,'message' => '找不到该商品'],500);
+            return response(['status_code' => 1,'message' => '找不到该商品'],404);
         }
         $user->favoriteProducts()->attach($product);
         return response(['status_code' => 0,'message' => '收藏成功']);
@@ -65,7 +65,7 @@ class Product extends Model
         $user = User::find(Auth::user()->id);
         $product = Product::where('id','=',$id)->first();
         if(empty($product)){
-            return response(['status_code' => 1,'message' => '找不到该商品'],500);
+            return response(['status_code' => 1,'message' => '找不到该商品'],404);
         }
         $user->favoriteProducts()->detach($product);
         return response(['status_code' => 0,'message' => '取消收藏成功']);

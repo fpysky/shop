@@ -123,4 +123,62 @@ class CartController extends Controller
     {
         return CartItem::remove($id);
     }
+
+    /**
+     * @api {put} /api/cart/{id} 02.购物车更新商品
+     * @apiName update
+     * @apiGroup 03Cart
+     *
+     * @apiParam {Number} id             M   购物车商品ID
+     * @apiParam {Number} amount         M   购物车商品数量
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+     *          "status_code": 0,
+     *          "message": "购物车商品更新成功",
+     *          "amount": 10
+     *     }
+     * @apiErrorExample {json} 错误返回
+     *     HTTP/1.1 409
+     *     {
+     *          "status_code": 1,
+     *          "message": "库存不足"
+     *     }
+     *      HTTP/1.1 422
+     *     {
+     *          "status_code": 1,
+     *          "message": "找不到该购物车商品"
+     *     }
+     * */
+    public function update($id,Request $request){
+        $args['id'] = intval($id,0);
+        $args['amount'] = $request->input('amount',0);
+        $args['amount'] = intval($args['amount'],0);
+        if($args['id'] == 0){
+            return response(['status_code' => 1,'message' => '购物车商品ID不能为空'],422);
+        }
+        if($args['amount'] == 0){
+            return response(['status_code' => 1,'message' => '购物车商品数量不能为空或小于1'],422);
+        }
+        return CartItem::updateAmount($args);
+    }
+
+    /**
+     * @api {delete} /api/cart/settle 03.结算
+     * @apiName settle
+     * @apiGroup 03Cart
+     *
+     * @apiParam {Number} id             M   商品skuID
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+     *          "status_code": 0,
+     *          "message": "商品移除成功"
+     *     }
+     * */
+    public function settle(){
+
+    }
 }
