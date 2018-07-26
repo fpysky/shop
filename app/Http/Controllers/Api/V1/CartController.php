@@ -136,8 +136,7 @@ class CartController extends Controller
      *     HTTP/1.1 200
      *     {
      *          "status_code": 0,
-     *          "message": "购物车商品更新成功",
-     *          "amount": 10
+     *          "message": "购物车商品更新成功"
      *     }
      * @apiErrorExample {json} 错误返回
      *     HTTP/1.1 409
@@ -169,17 +168,63 @@ class CartController extends Controller
      * @apiName settle
      * @apiGroup 03Cart
      *
-     * @apiParam {Number} id             M   购物车商品ID
+     * @apiParam {Array} cartIdCollection     M   购物车商品ID集合
+     *
+     * @apiParamExample {json} 传参示例:
+     *  {
+     *     "cartIdCollection":[3,2]
+     *  }
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
      *     {
-     *          "status_code": 0,
-     *          "message": "商品移除成功"
+     *           "status_code": 0,
+     *           "list": [
+     *              {
+     *                  "id": 2,
+     *                  "user_id": 2,
+     *                  "product_sku_id": 1,
+     *                  "amount": 1,
+     *                  "productSku": {
+     *                      "id": 1,
+     *                      "title": "vel",
+     *                      "description": "Rerum maiores eos eligendi dolorum qui corporis.",
+     *                      "price": "6127.00",
+     *                      "stock": 13738,
+     *                      "product_id": 1,
+     *                      "created_at": "2018-07-23 09:08:19",
+     *                      "updated_at": "2018-07-25 07:38:07",
+     *                      "product": {
+     *                          "id": 1,
+     *                          "title": "aliquid",
+     *                          "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                          "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                          "on_sale": true,
+     *                          "classify_id": 2,
+     *                          "rating": 3,
+     *                          "sold_count": 0,
+     *                          "review_count": 0,
+     *                          "price": "1018.00",
+     *                          "created_at": "2018-07-23 09:08:19",
+     *                          "updated_at": "2018-07-23 09:08:19"
+     *                      }
+     *                  }
+     *              },
+     *              ...
+     *           ]
+     *       }
+     * @apiErrorExample {json} 错误返回
+     *     HTTP/1.1 422
+     *     {
+     *          "status_code": 1,
+     *          "message": "购物车商品ID集合不能为空"
      *     }
      * */
     public function settle(Request $request){
-        $id = $request->input('id',0);
-        $id = intval('');
+        $cartIdCollection = $request->input('cartIdCollection');
+        if(empty($cartIdCollection)){
+            return response(['status_code' => 1,'message' => '购物车商品ID集合不能为空']);
+        }
+        return CartItem::settle($cartIdCollection);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Resources\CartItemResource;
 use Auth;
+use Illuminate\Support\Facades\Redis;
 
 class CartItem extends Model
 {
@@ -68,6 +69,13 @@ class CartItem extends Model
         }
         $item->amount = $args['amount'];
         $item->save();
-        return response(['status_code' => 0,'message' => '购物车商品更新成功','amount' => $item->amount]);
+        return response(['status_code' => 0,'message' => '购物车商品更新成功']);
+    }
+
+    public static function settle($cartIdCollection){
+        $user = User::find(Auth::user()->id);
+        $cart = $user->cartItems()->whereIn('id',$cartIdCollection)->with(['productSku.product'])->get();
+        $cart = CartItemResource::collection($cart);
+        return response(['status_code' => 0,'list' => $cart]);
     }
 }
