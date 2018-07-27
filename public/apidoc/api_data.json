@@ -666,7 +666,7 @@
       "examples": [
         {
           "title": "传参示例:",
-          "content": "{\n      \"address_id\":2,\n      \"items\":[\n          {\n              \"sku_id\":1,\n              \"amount\":1\n          }\n      ]\n  }",
+          "content": "{\n      \"address_id\":2,\n      \"items\":[\n          {\n              \"sku_id\":1,\n              \"amount\":1\n          }\n         ...\n      ]\n  }",
           "type": "json"
         }
       ]

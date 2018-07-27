@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Dingo\Api\Exception\StoreResourceFailedException;
 
-class request extends FormRequest
+class Request extends FormRequest
 {
     public function authorize()
     {
