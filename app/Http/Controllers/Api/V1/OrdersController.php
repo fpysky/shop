@@ -278,8 +278,10 @@ class OrdersController extends Controller
     public function show($id){
         $id = intval($id,0);
         if($id == 0){
-            return response(['status_code' => 422,'message' => 'ID不能为空']);
+            return response(['status_code' => 1,'message' => 'ID不能为空']);
         }
-        return Order::show($id);
+        $order = Order::show($id);
+//        $this->authorize('own', $order);
+        return ['status_code' => 0,'list' => $order];
     }
 }

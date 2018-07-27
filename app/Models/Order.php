@@ -180,7 +180,6 @@ class Order extends Model
         if(empty($order)){
             return response(['status_code' => 1,'message' => '找不到此订单'],404);
         }
-        $order = new OrderResource($order);//$order->load(['items.productSku', 'items.product']);
-        return ['status_code' => 0,'list' => $order];
+        return new OrderResource($order);
     }
 }
