@@ -20,7 +20,7 @@ class OrdersController extends Controller
      * @apiName store
      * @apiGroup 04Order
      *
-     * @apiParam {Number} address_id     M   商品skuID
+     * @apiParam {Number} address_id     M   地址ID
      * @apiParam {Array} items           M   商品数量
      *
      * @apiParamExample {json} 传参示例:

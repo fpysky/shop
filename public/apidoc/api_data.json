@@ -652,7 +652,7 @@
             "type": "Number",
             "optional": false,
             "field": "address_id",
-            "description": "<p>M   商品skuID</p>"
+            "description": "<p>M   地址ID</p>"
           },
           {
             "group": "Parameter",
