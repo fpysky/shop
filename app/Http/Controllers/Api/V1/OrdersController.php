@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
+use App\Jobs\CloseOrder;
 
 class OrdersController extends Controller
 {
