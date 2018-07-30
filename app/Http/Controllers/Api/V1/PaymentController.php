@@ -9,16 +9,27 @@ use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {
-    public function payByAlipay(Order $order, Request $request)
+    /**
+     * @api {post} /api/payment/{id}/alipay 04.订单支付
+     * @apiName payByAlipay
+     * @apiGroup 04Order
+     *
+     * @apiParam {Number}  id    M 订单ID
+     */
+    public function payByAlipay($id, Request $request)
     {
+        $order = Order::where('id','=',$id)->first();
+        if(empty($order)){
+            return response(['status_code' => 1,'message' => '找不到此订单']);
+        }
         // 判断订单是否属于当前用户
-//        $this->authorize('own', $order);
+        // $this->authorize('own', $order);
         // 订单已支付或者已关闭
         if ($order->paid_at || $order->closed) {
             throw new InvalidRequestException('订单状态不正确');
         }
-//
-//        // 调用支付宝的网页支付
+
+        // 调用支付宝的网页支付
         return app('alipay')->web([
             'out_trade_no' => $order->no, // 订单编号，需保证在商户端不重复
             'total_amount' => $order->total_amount, // 订单金额，单位元，支持小数点后两位
@@ -26,17 +37,18 @@ class PaymentController extends Controller
         ]);
     }
 
+    // 前端回调页面
     public function alipayReturn()
     {
         try {
             app('alipay')->verify();
         } catch (\Exception $e) {
-            return view('pages.error', ['msg' => '数据不正确']);
+            return response(['status_code' => 1,'message' => '数据不正确']);
         }
-
-        return view('pages.success', ['msg' => '付款成功']);
+        return response(['status_code' => 0,'message' => '付款成功']);
     }
 
+    // 服务器端回调
     public function alipayNotify()
     {
         // 校验输入参数

@@ -598,6 +598,29 @@ define({ "api": [
     "groupTitle": "订单"
   },
   {
+    "type": "post",
+    "url": "/api/payment/{id}/alipay",
+    "title": "04.订单支付",
+    "name": "payByAlipay",
+    "group": "04Order",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M 订单ID</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/PaymentController.php",
+    "groupTitle": "订单"
+  },
+  {
     "type": "get",
     "url": "/api/orders/{id}",
     "title": "03.订单详情",
