@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class PaymentController extends Controller
 {
     /**
-     * @api {post} /api/payment/{id}/alipay 04.订单支付
+     * @api {get} /api/payment/{id}/alipay 04.订单支付
      * @apiName payByAlipay
      * @apiGroup 04Order
      *
@@ -37,7 +37,18 @@ class PaymentController extends Controller
         ]);
     }
 
-    // 前端回调页面
+    /**
+     * @api {get} /api/payment/alipay/return 05.支付成功前端回调
+     * @apiName return
+     * @apiGroup 04Order
+     *
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *     {
+                'status_code':0,
+     *          'message':'付款成功'
+     *     }
+     */
     public function alipayReturn()
     {
         try {

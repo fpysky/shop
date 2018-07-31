@@ -598,7 +598,7 @@
     "groupTitle": "订单"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/api/payment/{id}/alipay",
     "title": "04.订单支付",
     "name": "payByAlipay",
@@ -615,6 +615,25 @@
           }
         ]
       }
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/PaymentController.php",
+    "groupTitle": "订单"
+  },
+  {
+    "type": "get",
+    "url": "/api/payment/alipay/return",
+    "title": "05.支付成功前端回调",
+    "name": "return",
+    "group": "04Order",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n            'status_code':0,\n     'message':'付款成功'\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "app/Http/Controllers/Api/V1/PaymentController.php",
