@@ -85,4 +85,13 @@ class Product extends Model
     public static function getAllSellProduct(){
         return Product::where('on_sale','=',1)->get()->toArray();
     }
+
+    //获取手机产品列表
+    public static function mobilePhones(){
+        $list = Product::where('on_sale','=',1)->whereIn('classify_id',function($query){
+            $query->select(['id'])->from('product_classifies')->where('pid','=',1);
+        })->take(10)->get();
+        $list = ProductResource::collection($list);
+        return response(['status_code' => 0,'list' => $list]);
+    }
 }

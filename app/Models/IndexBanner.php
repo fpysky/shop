@@ -17,9 +17,9 @@ class IndexBanner extends Model
         return \Storage::disk('public')->url($this->attributes['image']);
     }
 
-    public static function getIndexBanners(){
+    public static function banners(){
         $list = IndexBanner::all();
         $list = IndexBannerResource::collection($list);
-        return response(['code' => 0,'list' => $list]);
+        return response(['status_code' => 0,'list' => $list]);
     }
 }

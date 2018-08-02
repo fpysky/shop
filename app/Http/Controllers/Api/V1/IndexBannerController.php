@@ -14,13 +14,13 @@ class IndexBannerController extends Controller
      */
 
     /**
-     * @api {get} /api/getIndexBanners 01.获取首页Banner
-     * @apiName getIndexBanners
+     * @api {get} /api/index/banners 01.获取首页Banner
+     * @apiName banners
      * @apiGroup 08Index
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
      *      {
-     *           "code": 0,
+     *           "status_code": 0,
      *           "list": [
      *               {
      *                   "id": 3,
@@ -36,11 +36,12 @@ class IndexBannerController extends Controller
      *                       "timezone_type": 3,
      *                       "timezone": "UTC"
      *                   }
-     *               }
+     *               },
+     *              ...
      *           ]
      *       }
      */
-    public function getIndexBanners(){
-        return IndexBanner::getIndexBanners();
+    public function banners(){
+        return IndexBanner::banners();
     }
 }

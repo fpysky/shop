@@ -877,25 +877,6 @@
   },
   {
     "type": "get",
-    "url": "/api/hotProducts",
-    "title": "01.热品推荐",
-    "name": "hotProducts",
-    "group": "06Product",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "    HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 4,\n              \"title\": \"nulla\",\n              \"description\": \"Alias sapiente reiciendis est quis.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/pa7DrV43Mw.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 1,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"324.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n     ...\n     ],\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
-    "groupTitle": "商品"
-  },
-  {
-    "type": "get",
     "url": "/api/products/{id}",
     "title": "02.商品详情",
     "name": "products",
@@ -1170,21 +1151,59 @@
   },
   {
     "type": "get",
-    "url": "/api/getIndexBanners",
+    "url": "/api/index/banners",
     "title": "01.获取首页Banner",
-    "name": "getIndexBanners",
+    "name": "banners",
     "group": "08Index",
     "success": {
       "examples": [
         {
           "title": "成功返回",
-          "content": "HTTP/1.1 200\n {\n      \"code\": 0,\n      \"list\": [\n          {\n              \"id\": 3,\n              \"image\": \"http://shop.test/storage/images/meilan6T.png\",\n              \"product_id\": 3,\n              \"created_at\": {\n                  \"date\": \"2018-08-02 08:14:00.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-08-02 08:14:00.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          }\n      ]\n  }",
+          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 3,\n              \"image\": \"http://shop.test/storage/images/meilan6T.png\",\n              \"product_id\": 3,\n              \"created_at\": {\n                  \"date\": \"2018-08-02 08:14:00.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-08-02 08:14:00.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n         ...\n      ]\n  }",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
     "filename": "app/Http/Controllers/Api/V1/IndexBannerController.php",
+    "groupTitle": "首页通用接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/index/hotProducts",
+    "title": "02.首页热品推荐",
+    "name": "hotProducts",
+    "group": "08Index",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "    HTTP/1.1 200\n{\n      \"status_code\": 0,\n      \"list\": [\n          {\n              \"id\": 4,\n              \"title\": \"nulla\",\n              \"description\": \"Alias sapiente reiciendis est quis.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/pa7DrV43Mw.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 1,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"324.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 01:36:48.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n     ...\n     ],\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "首页通用接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/index/mobilePhones",
+    "title": "03.首页手机专栏",
+    "name": "mobilePhones",
+    "group": "08Index",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n     \"status_code\": 0,\n     \"list\": [\n         {\n             \"id\": 1,\n             \"title\": \"aliquid\",\n             \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n             \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n             \"on_sale\": true,\n             \"classify_id\": 2,\n             \"rating\": 3,\n             \"sold_count\": 0,\n             \"review_count\": 0,\n             \"price\": \"1018.00\",\n             \"created_at\": {\n                 \"date\": \"2018-07-23 09:08:19.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             },\n             \"updated_at\": {\n                 \"date\": \"2018-07-23 09:08:19.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             }\n         },\n         ...\n     ],\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
     "groupTitle": "首页通用接口"
   }
 ]

@@ -14,9 +14,9 @@ class ProductController extends Controller
      */
 
     /**
-     * @api {get} /api/hotProducts 01.热品推荐
+     * @api {get} /api/index/hotProducts 02.首页热品推荐
      * @apiName hotProducts
-     * @apiGroup 06Product
+     * @apiGroup 08Index
      *
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
@@ -244,5 +244,44 @@ class ProductController extends Controller
         $args['pSize'] = isset($args['pSize'])?intval($args['pSize']):15;
         $args['page'] = isset($args['page'])?intval($args['page']):1;
         return Product::favorites($args);
+    }
+
+    /**
+     * @api {get} /api/index/mobilePhones 03.首页手机专栏
+     * @apiName mobilePhones
+     * @apiGroup 08Index
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *      {
+     *          "status_code": 0,
+     *          "list": [
+     *              {
+     *                  "id": 1,
+     *                  "title": "aliquid",
+     *                  "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                  "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                  "on_sale": true,
+     *                  "classify_id": 2,
+     *                  "rating": 3,
+     *                  "sold_count": 0,
+     *                  "review_count": 0,
+     *                  "price": "1018.00",
+     *                  "created_at": {
+     *                      "date": "2018-07-23 09:08:19.000000",
+     *                      "timezone_type": 3,
+     *                      "timezone": "UTC"
+     *                  },
+     *                  "updated_at": {
+     *                      "date": "2018-07-23 09:08:19.000000",
+     *                      "timezone_type": 3,
+     *                      "timezone": "UTC"
+     *                  }
+     *              },
+     *              ...
+     *          ],
+     *      }
+     */
+    public function mobilePhones(){
+        return Product::mobilePhones();
     }
 }
