@@ -15,6 +15,11 @@ class ProductClassify extends Model
         return ProductClassify::where('pid','<>',0)->get()->toArray();
     }
 
+    public function product()
+    {
+        return $this->hasMany(Product::class,'classify_id','id');
+    }
+
     public static function getProductClassify(){
         $root = ProductClassify::getRootClassify();
         $list = array();
@@ -28,7 +33,6 @@ class ProductClassify extends Model
     }
 
     protected static function getChild($id){
-        $list = ProductClassify::where('pid','=',$id)->get();
-        return ProductClassifyResource::collection($list);
+        return ProductClassify::where('pid','=',$id)->with('product')->get();
     }
 }

@@ -27,4 +27,6 @@ Route::group([
     $router->delete('productClassify/{id}','ProductClassifyController@destroy');
     $router->get('productClassify/{id}/edit','ProductClassifyController@edit');
     $router->put('productClassify/{id}','ProductClassifyController@update');
+    //订单
+    $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
 });

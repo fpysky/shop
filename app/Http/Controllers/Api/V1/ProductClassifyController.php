@@ -35,13 +35,47 @@ class ProductClassifyController extends Controller
      *                           "name": "魅族手机",
      *                           "created_at": null,
      *                           "updated_at": null
+     *                           "product": [
+     *                               {
+     *                                   "id": 1,
+     *                                   "title": "aliquid",
+     *                                   "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                                   "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                                   "on_sale": true,
+     *                                   "classify_id": 2,
+     *                                   "rating": 3,
+     *                                   "sold_count": 0,
+     *                                   "review_count": 0,
+     *                                   "price": "1018.00",
+     *                                   "created_at": "2018-07-23 09:08:19",
+     *                                   "updated_at": "2018-07-23 09:08:19"
+     *                               },
+     *                              ...
+     *                            ]
      *                       },
      *                       {
      *                           "id": 3,
      *                           "pid": 1,
      *                           "name": "魅蓝手机",
      *                           "created_at": null,
-     *                           "updated_at": null
+     *                           "updated_at": null,
+     *                           "product": [
+     *                               {
+     *                                   "id": 1,
+     *                                   "title": "aliquid",
+     *                                   "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                                   "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                                   "on_sale": true,
+     *                                   "classify_id": 2,
+     *                                   "rating": 3,
+     *                                   "sold_count": 0,
+     *                                   "review_count": 0,
+     *                                   "price": "1018.00",
+     *                                   "created_at": "2018-07-23 09:08:19",
+     *                                   "updated_at": "2018-07-23 09:08:19"
+     *                               },
+     *                              ...
+     *                            ]
      *                       }
      *                     ]
      *                  },
