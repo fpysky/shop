@@ -29,3 +29,4 @@ include 'productClassify.php';
 include 'product.php';
 include 'cart.php';
 include 'order.php';
+include 'indexCommon.php';

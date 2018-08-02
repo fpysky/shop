@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Http\Resources\IndexBannerResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class IndexBanner extends Model
 {
@@ -13,5 +15,11 @@ class IndexBanner extends Model
             return $this->attributes['image'];
         }
         return \Storage::disk('public')->url($this->attributes['image']);
+    }
+
+    public static function getIndexBanners(){
+        $list = IndexBanner::all();
+        $list = IndexBannerResource::collection($list);
+        return response(['code' => 0,'list' => $list]);
     }
 }

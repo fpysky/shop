@@ -1167,5 +1167,24 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "app/Http/Controllers/Api/V1/UserAddressesController.php",
     "groupTitle": "用户地址接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/getIndexBanners",
+    "title": "01.获取首页Banner",
+    "name": "getIndexBanners",
+    "group": "08Index",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n      \"code\": 0,\n      \"list\": [\n          {\n              \"id\": 3,\n              \"image\": \"http://shop.test/storage/images/meilan6T.png\",\n              \"product_id\": 3,\n              \"created_at\": {\n                  \"date\": \"2018-08-02 08:14:00.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-08-02 08:14:00.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          }\n      ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/IndexBannerController.php",
+    "groupTitle": "首页通用接口"
   }
 ] });
