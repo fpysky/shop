@@ -15,6 +15,19 @@ class ProductsController extends Controller
 {
     use ModelForm;
 
+    public function getAllSellProduct(){
+        $arr = [];
+        $list = Product::getAllSellProduct();
+        if(!empty($list)){
+            foreach($list as $k => $v){
+                $r['id'] = $v['id'];
+                $r['text'] = $v['title'];
+                $arr[] = $r;
+            }
+        }
+        return $arr;
+    }
+
     /**
      * Index interface.
      *

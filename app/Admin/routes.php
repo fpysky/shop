@@ -18,6 +18,7 @@ Route::group([
     $router->get('products/{id}/edit', 'ProductsController@edit');
     $router->put('products/{id}', 'ProductsController@update');
     $router->delete('products/{id}','ProductsController@destroy');
+    $router->get('products/getAllSellProduct', 'ProductsController@getAllSellProduct');
     //商品分类
     $router->get('productClassify','ProductClassifyController@index');
     $router->get('productClassify/create','ProductClassifyController@create');
@@ -29,4 +30,11 @@ Route::group([
     $router->put('productClassify/{id}','ProductClassifyController@update');
     //订单
     $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
+    //首页banner
+    $router->get('indexBanner', 'IndexBannerController@index');
+    $router->get('indexBanner/create', 'IndexBannerController@create');
+    $router->post('indexBanner', 'IndexBannerController@store');
+    $router->get('indexBanner/{id}/edit', 'IndexBannerController@edit');
+    $router->put('indexBanner/{id}', 'IndexBannerController@update');
+    $router->delete('indexBanner/{id}','IndexBannerController@destroy');
 });

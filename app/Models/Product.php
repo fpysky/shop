@@ -80,4 +80,9 @@ class Product extends Model
         $totalPage = ceil($total / $args['pSize']);
         return response(['status_code' => 0,'list' => $products,'totalPage' => $totalPage,'total' => $total]);
     }
+
+    //获取所有在销售的商品列表
+    public static function getAllSellProduct(){
+        return Product::where('on_sale','=',1)->get()->toArray();
+    }
 }
