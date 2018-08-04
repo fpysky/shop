@@ -317,6 +317,75 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/email_verification/verify",
+    "title": "07.验证邮箱",
+    "name": "register",
+    "group": "02Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\": \"邮箱验证成功\",\n  \"status_code\":0,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 400\n{\n     \"message\": \"验证链接不正确或已过期\",\n     \"status_code\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/EmailVerificationController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "post",
+    "url": "/api/email_verification/send",
+    "title": "06.发送验证邮件",
+    "name": "register",
+    "group": "02Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   用户ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\": \"邮件发送成功\",\n  \"status_code\":0,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 400\n{\n     \"message\": \"你已经验证过邮箱了\",\n     \"status_code\": 400\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/EmailVerificationController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "get",
     "url": "/api/auth/user",
     "title": "03.获取用户信息",
     "name": "user",
@@ -1170,6 +1239,25 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/index/digitalAudio",
+    "title": "04.首页数码配件",
+    "name": "digitalAudio",
+    "group": "08Index",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n     \"status_code\": 0,\n     \"list\": [\n         {\n             \"id\": 1,\n             \"title\": \"aliquid\",\n             \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n             \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n             \"on_sale\": true,\n             \"classify_id\": 2,\n             \"rating\": 3,\n             \"sold_count\": 0,\n             \"review_count\": 0,\n             \"price\": \"1018.00\",\n             \"created_at\": {\n                 \"date\": \"2018-07-23 09:08:19.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             },\n             \"updated_at\": {\n                 \"date\": \"2018-07-23 09:08:19.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             }\n         },\n         ...\n     ],\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "首页通用接口"
+  },
+  {
+    "type": "get",
     "url": "/api/index/hotProducts",
     "title": "02.首页热品推荐",
     "name": "hotProducts",
@@ -1190,8 +1278,27 @@ define({ "api": [
   {
     "type": "get",
     "url": "/api/index/mobilePhones",
-    "title": "03.首页手机专栏",
+    "title": "03.首页手机",
     "name": "mobilePhones",
+    "group": "08Index",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n {\n     \"status_code\": 0,\n     \"list\": [\n         {\n             \"id\": 1,\n             \"title\": \"aliquid\",\n             \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n             \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n             \"on_sale\": true,\n             \"classify_id\": 2,\n             \"rating\": 3,\n             \"sold_count\": 0,\n             \"review_count\": 0,\n             \"price\": \"1018.00\",\n             \"created_at\": {\n                 \"date\": \"2018-07-23 09:08:19.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             },\n             \"updated_at\": {\n                 \"date\": \"2018-07-23 09:08:19.000000\",\n                 \"timezone_type\": 3,\n                 \"timezone\": \"UTC\"\n             }\n         },\n         ...\n     ],\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/ProductController.php",
+    "groupTitle": "首页通用接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/index/perimeterLife",
+    "title": "05.首页数码配件",
+    "name": "perimeterLife",
     "group": "08Index",
     "success": {
       "examples": [
