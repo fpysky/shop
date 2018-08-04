@@ -8,6 +8,9 @@ $api->version('v1', function ($api) {
         $api->post('auth/register','AuthController@register');
         $api->post('auth/login','AuthController@login');
         $api->post('geetest_api_v1','AuthController@geetest_api_v1');//极验后端校验
+        $api->get('/email_verify_notice', 'PagesController@emailVerifyNotice')->name('email_verify_notice');
+        $api->get('/email_verification/verify', 'EmailVerificationController@verify')->name('email_verification.verify');//邮箱验证处理
+        $api->get('/email_verification/send', 'EmailVerificationController@send')->name('email_verification.send');//主动发送验证邮件
     });
     $api->group([
         'middleware' => 'jwt.api.auth',

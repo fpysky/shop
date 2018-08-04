@@ -247,7 +247,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @api {get} /api/index/mobilePhones 03.首页手机专栏
+     * @api {get} /api/index/mobilePhones 03.首页手机
      * @apiName mobilePhones
      * @apiGroup 08Index
      * @apiSuccessExample {json} 成功返回
@@ -283,5 +283,83 @@ class ProductController extends Controller
      */
     public function mobilePhones(){
         return Product::mobilePhones();
+    }
+
+    /**
+     * @api {get} /api/index/digitalAudio 04.首页数码配件
+     * @apiName digitalAudio
+     * @apiGroup 08Index
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *      {
+     *          "status_code": 0,
+     *          "list": [
+     *              {
+     *                  "id": 1,
+     *                  "title": "aliquid",
+     *                  "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                  "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                  "on_sale": true,
+     *                  "classify_id": 2,
+     *                  "rating": 3,
+     *                  "sold_count": 0,
+     *                  "review_count": 0,
+     *                  "price": "1018.00",
+     *                  "created_at": {
+     *                      "date": "2018-07-23 09:08:19.000000",
+     *                      "timezone_type": 3,
+     *                      "timezone": "UTC"
+     *                  },
+     *                  "updated_at": {
+     *                      "date": "2018-07-23 09:08:19.000000",
+     *                      "timezone_type": 3,
+     *                      "timezone": "UTC"
+     *                  }
+     *              },
+     *              ...
+     *          ],
+     *      }
+     */
+    public function digitalAudio(){
+        return Product::digitalAudio();
+    }
+
+    /**
+     * @api {get} /api/index/perimeterLife 05.首页数码配件
+     * @apiName perimeterLife
+     * @apiGroup 08Index
+     * @apiSuccessExample {json} 成功返回
+     *     HTTP/1.1 200
+     *      {
+     *          "status_code": 0,
+     *          "list": [
+     *              {
+     *                  "id": 1,
+     *                  "title": "aliquid",
+     *                  "description": "Iusto quia delectus quisquam est aut ducimus autem.",
+     *                  "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
+     *                  "on_sale": true,
+     *                  "classify_id": 2,
+     *                  "rating": 3,
+     *                  "sold_count": 0,
+     *                  "review_count": 0,
+     *                  "price": "1018.00",
+     *                  "created_at": {
+     *                      "date": "2018-07-23 09:08:19.000000",
+     *                      "timezone_type": 3,
+     *                      "timezone": "UTC"
+     *                  },
+     *                  "updated_at": {
+     *                      "date": "2018-07-23 09:08:19.000000",
+     *                      "timezone_type": 3,
+     *                      "timezone": "UTC"
+     *                  }
+     *              },
+     *              ...
+     *          ],
+     *      }
+     */
+    public function perimeterLife(){
+        return Product::perimeterLife();
     }
 }

@@ -20,6 +20,10 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    protected $casts = [
+        'email_verified' => 'boolean',
+    ];
+
     public function favoriteProducts()
     {
         return $this->belongsToMany(Product::class, 'user_favorite_products')

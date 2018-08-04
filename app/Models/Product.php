@@ -94,4 +94,22 @@ class Product extends Model
         $list = ProductResource::collection($list);
         return response(['status_code' => 0,'list' => $list]);
     }
+
+    //获取数码配件列表
+    public static function digitalAudio(){
+        $list = Product::where('on_sale','=',1)->whereIn('classify_id',function($query){
+            $query->select(['id'])->from('product_classifies')->where('pid','=',15);
+        })->take(10)->get();
+        $list = ProductResource::collection($list);
+        return response(['status_code' => 0,'list' => $list]);
+    }
+
+    //获取生活周边列表
+    public static function perimeterLife(){
+        $list = Product::where('on_sale','=',1)->whereIn('classify_id',function($query){
+            $query->select(['id'])->from('product_classifies')->where('pid','=',26);
+        })->take(10)->get();
+        $list = ProductResource::collection($list);
+        return response(['status_code' => 0,'list' => $list]);
+    }
 }
