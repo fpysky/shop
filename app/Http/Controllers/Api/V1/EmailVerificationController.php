@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Exception;
 use App\Models\User;
 use Cache;
 use App\Notifications\EmailVerificationNotification;
-use Mail;
 
 class EmailVerificationController extends Controller
 {
     /**
      * @api {post} /api/email_verification/send 06.发送验证邮件
-     * @apiName register
+     * @apiName email_verificationSend
      * @apiGroup 02Auth
      *
      * @apiParam {String} id              M   用户ID
@@ -54,7 +52,7 @@ class EmailVerificationController extends Controller
 
     /**
      * @api {get} /api/email_verification/verify 07.验证邮箱
-     * @apiName register
+     * @apiName email_verificationVerify
      * @apiGroup 02Auth
      *
      * @apiSuccessExample {json} 成功返回

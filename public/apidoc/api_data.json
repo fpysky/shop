@@ -110,6 +110,75 @@
   },
   {
     "type": "post",
+    "url": "/api/email_verification/send",
+    "title": "06.发送验证邮件",
+    "name": "email_verificationSend",
+    "group": "02Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>M   用户ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\": \"邮件发送成功\",\n  \"status_code\":0,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 400\n{\n     \"message\": \"你已经验证过邮箱了\",\n     \"status_code\": 400\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/EmailVerificationController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "get",
+    "url": "/api/email_verification/verify",
+    "title": "07.验证邮箱",
+    "name": "email_verificationVerify",
+    "group": "02Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回",
+          "content": "HTTP/1.1 200\n{\n  \"message\": \"邮箱验证成功\",\n  \"status_code\":0,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "错误返回",
+          "content": "HTTP/1.1 400\n{\n     \"message\": \"验证链接不正确或已过期\",\n     \"status_code\": 1\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/V1/EmailVerificationController.php",
+    "groupTitle": "用户接口"
+  },
+  {
+    "type": "post",
     "url": "/api/geetest_api_v1",
     "title": "05.极验配置信息返回",
     "name": "geetest_api_v1",
@@ -313,75 +382,6 @@
     },
     "version": "0.0.0",
     "filename": "app/Http/Controllers/Api/V1/AuthController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "get",
-    "url": "/api/email_verification/verify",
-    "title": "07.验证邮箱",
-    "name": "register",
-    "group": "02Auth",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"message\": \"邮箱验证成功\",\n  \"status_code\":0,\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 400\n{\n     \"message\": \"验证链接不正确或已过期\",\n     \"status_code\": 1\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/EmailVerificationController.php",
-    "groupTitle": "用户接口"
-  },
-  {
-    "type": "post",
-    "url": "/api/email_verification/send",
-    "title": "06.发送验证邮件",
-    "name": "register",
-    "group": "02Auth",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>M   用户ID</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回",
-          "content": "HTTP/1.1 200\n{\n  \"message\": \"邮件发送成功\",\n  \"status_code\":0,\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "错误返回",
-          "content": "HTTP/1.1 400\n{\n     \"message\": \"你已经验证过邮箱了\",\n     \"status_code\": 400\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "app/Http/Controllers/Api/V1/EmailVerificationController.php",
     "groupTitle": "用户接口"
   },
   {
