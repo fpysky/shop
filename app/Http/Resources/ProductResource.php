@@ -20,7 +20,7 @@ class ProductResource extends Resource
             'description' => $this->description,
             'image' => $this->image,
             'on_sale' => $this->on_sale,
-            'classify_id' => $this->classify_id,
+            'product_classify_id' => $this->product_classify_id,
             'rating' => $this->rating,
             'sold_count' => $this->sold_count,
             'review_count' => $this->review_count,

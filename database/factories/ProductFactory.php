@@ -24,5 +24,6 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
         'sold_count'   => 0,
         'review_count' => 0,
         'price'        => 0,
+        'product_classify_id' => 2
     ];
 });

@@ -10,7 +10,7 @@ class Product extends Model
 {
     protected $fillable = [
         'title', 'description', 'image', 'on_sale',
-        'rating', 'sold_count', 'review_count', 'price'
+        'rating', 'sold_count', 'review_count', 'price', 'product_classify_id'
     ];
 
     protected $casts = [
@@ -27,6 +27,67 @@ class Product extends Model
     public function attrs()
     {
         return $this->hasMany(ProductSkuAttribute::class);
+    }
+
+    public static function getProduct($id){
+        $list = Product::find($id);
+        return response(['static_code' => 0,'list' => $list]);
+    }
+
+    public static function store($args){
+        if($args['id'] == 0){
+            $product = new Product();
+            $product->title = $args['title'];
+            $product->description = $args['description'];
+            $product->image = $args['image'];
+            $product->on_sale = $args['on_sale'];
+            $product->product_classify_id = intval($args['product_classify_id']);
+            $product->save();
+            return response(['status_code' => 0,'message' => '创建商品成功']);
+        }else{
+            $product = Product::find(intval($args['id']));
+            $product->title = $args['title'];
+            $product->description = $args['description'];
+            $product->image = $args['image'];
+            $product->on_sale = $args['on_sale'];
+            $product->product_classify_id = intval($args['product_classify_id']);
+            $product->save();
+
+            //sku
+            if(!empty($args['sku'])){
+                $insert = [];
+                foreach($args['sku'] as $k => $v){
+                    $arr['title'] = $v['title'];
+                    $arr['description'] = $v['description'];
+                    $arr['price'] = $v['price'];
+                    $arr['stock'] = $v['stock'];
+                    $arr['product_id'] = $v['product_id'];
+                    $arrs = [];
+                    foreach($v['attributes'] as $ks => $vs){
+                        $r['id'] = $vs['id'];
+                        $r['value'] = $vs['value'];
+                        $r['name'] = $vs['name'];
+                        $arrs[] = $r;
+                        unset($r);
+                    }
+                    $arr['attributes'] = json_encode($arrs);
+                    if($v['id'] == 0){
+                        $insert[] = $arr;
+                        unset($arrs);
+                        unset($arr);
+                    }else{
+                        $arr['id'] = $v['id'];
+                        ProductSku::where('id','=',$arr['id'])->update($arr);
+                        unset($arrs);
+                        unset($arr);
+                    }
+                }
+                if(!empty($insert)){
+                    ProductSku::insert($insert);
+                }
+            }
+            return response(['status_code' => 0,'message' => '修改商品成功']);
+        }
     }
 
     public function getImageUrlAttribute()

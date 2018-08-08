@@ -29,7 +29,8 @@ class ProductClassifyController extends Controller
     }
 
     public function getSecondRootClassify(){
-        $arr = [['id' => 0,'text' => 'root']];
+//        $arr = [['id' => 0,'text' => 'root']];
+        $arr = [];
         $list = ProductClassify::getSecondRootClassify();
         if(!empty($list)){
             foreach($list as $k => $v){

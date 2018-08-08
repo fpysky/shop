@@ -11,14 +11,20 @@ Route::group([
 ], function (Router $router) {
     $router->get('/', 'HomeController@index');
     $router->get('users', 'UsersController@index');
+    $router->post('uploadImage', 'CommonController@uploadImage')->name('admin.uploadImage');
     //商品列表
     $router->get('products', 'ProductsController@index');
     $router->get('products/create', 'ProductsController@create');
     $router->post('products', 'ProductsController@store');
     $router->get('products/{id}/edit', 'ProductsController@edit');
+    $router->get('products/{id}', 'ProductsController@getProduct');
     $router->put('products/{id}', 'ProductsController@update');
     $router->delete('products/{id}','ProductsController@destroy');
     $router->get('products/getAllSellProduct', 'ProductsController@getAllSellProduct');
+    //商品sku类别
+    $router->get('productSkuAttributes/{productId}', 'ProductSkuAttributesController@getData');
+    $router->post('productSkuAttributes', 'ProductSkuAttributesController@store');
+    $router->delete('productSkuAttributes/{id}', 'ProductSkuAttributesController@destroy');
     //商品分类
     $router->get('productClassify','ProductClassifyController@index');
     $router->get('productClassify/create','ProductClassifyController@create');
