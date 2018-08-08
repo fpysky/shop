@@ -204,8 +204,7 @@
                 }
             },
             getProduct(){
-                axios.get('/api/products/'+this.productForm.id).then(res => {
-                    console.log(res);
+                axios.get('/admin/products/'+this.productForm.id).then(res => {
                     this.productForm.id = res.data.list.product.id;
                     this.productForm.title = res.data.list.product.title;
                     this.productForm.product_classify_id = res.data.list.product.product_classify_id;
@@ -215,7 +214,6 @@
                     ue.ready(function() { 
                         ue.setContent(res.data.list.product.description); 
                     });
-                    console.log(this.productForm);
                 });
             },
             handleAvatarSuccess(res, file) {

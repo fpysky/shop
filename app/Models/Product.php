@@ -31,7 +31,9 @@ class Product extends Model
     }
 
     public static function getProduct($id){
-        $list = Product::find($id);
+        $product = Product::with('skus')->where('id','=',$id)->firstOrFail();
+        $list['product'] = new ProductResource($product);
+        $list['productSkus'] = ProductSkuResource::collection($product->skus);
         return response(['static_code' => 0,'list' => $list]);
     }
 
