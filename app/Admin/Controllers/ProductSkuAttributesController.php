@@ -12,7 +12,7 @@ class ProductSkuAttributesController extends Controller
     public function store(ProductSkuAttributeRequest $request){
         $attributes = $request->post();
         if(empty($attributes)){
-            return response(['status_code' => 1,'message' => 'attributes不能为空']);
+            return response(['status_code' => 1,'message' => 'attributes不能为空'],422);
         }
         return ProductSkuAttribute::store($attributes);
     }
