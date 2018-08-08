@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\ProductDetailResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSkuResource;
 use Auth;
@@ -106,14 +107,15 @@ class Product extends Model
         return response(['status_code' => 0,'list' => $list]);
     }
 
+    public function productSkuAttribute(){
+        return $this->hasMany(ProductSkuAttribute::class);
+    }
+
     //商品详情
-    public static function products($id){
-        $product = Product::where('id','=',$id)->firstOrFail();
-        $product = new ProductResource($product);
-        $productSkus = ProductSkuResource::collection($product->skus);
-        $list['product'] = $product;
-        $list['productSkus'] = $productSkus;
-        return response(['status_code' => 0,'list' => $list]);
+    public static function products($args){
+        $product = Product::with(['productSkuAttribute','skus'])->where('id','=',$args['id'])->firstOrFail();
+        $product = new ProductDetailResource($product);
+        return response(['status_code' => 0,'list' => $product]);
     }
 
     //收藏商品

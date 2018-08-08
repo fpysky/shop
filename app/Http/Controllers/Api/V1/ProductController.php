@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\ProductDetailRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,11 +55,35 @@ class ProductController extends Controller
     }
 
     /**
-     * @api {get} /api/products/{id} 02.商品详情
+     * @api {post} /api/products 02.商品详情
      * @apiName products
      * @apiGroup 06Product
      *
      * @apiParam {Number} id             M   商品ID
+     * @apiParam {Number} attributes     M   商品Sku属性
+     *
+     * @apiParamExample {json} 传参示例:
+     *     {
+     *          "id":23,
+     *          "attributes":[
+     *              {
+     *                  "id":19,
+     *                  "value":"土黄色"
+     *              },
+     *              {
+     *                  "id":20,
+     *                  "value":"全网通"
+     *              },
+     *              {
+     *                  "id":21,
+     *                  "value":"128g"
+     *              },
+     *              {
+     *                  "id":22,
+     *                  "value":"官方标配"
+     *              }
+     *          ]
+     *      }
      *
      * @apiErrorExample {json} 错误返回
      *     HTTP/1.1 422
@@ -70,60 +95,85 @@ class ProductController extends Controller
      * @apiSuccessExample {json} 成功返回
      *     HTTP/1.1 200
      *      {
-     *           "status_code": 0,
-     *           "list": {
-     *               "product": {
-     *                   "id": 1,
-     *                   "title": "aliquid",
-     *                   "description": "Iusto quia delectus quisquam est aut ducimus autem.",
-     *                   "image": "https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg",
-     *                   "on_sale": true,
-     *                   "classify_id": 2,
-     *                   "rating": 3,
-     *                   "sold_count": 0,
-     *                   "review_count": 0,
-     *                   "price": "1018.00",
-     *                   "created_at": {
-     *                       "date": "2018-07-23 09:08:19.000000",
-     *                       "timezone_type": 3,
-     *                       "timezone": "UTC"
-     *                   },
-     *                   "updated_at": {
-     *                       "date": "2018-07-23 09:08:19.000000",
-     *                       "timezone_type": 3,
-     *                       "timezone": "UTC"
-     *                   }
-     *               },
-     *               "productSkus": [
-     *                   {
-     *                       "id": 1,
-     *                       "title": "vel",
-     *                       "description": "Rerum maiores eos eligendi dolorum qui corporis.",
-     *                       "price": "6127.00",
-     *                       "stock": 13740,
-     *                       "product_id": 1,
-     *                       "created_at": {
-     *                           "date": "2018-07-23 09:08:19.000000",
-     *                           "timezone_type": 3,
-     *                           "timezone": "UTC"
-     *                       },
-     *                       "updated_at": {
-     *                           "date": "2018-07-23 09:08:19.000000",
-     *                           "timezone_type": 3,
-     *                           "timezone": "UTC"
-     *                       }
-     *                   },
-     *               ...
-     *               ]
-     *           }
-     *       }
+     *          "status_code": 0,
+     *          "list": {
+     *              "id": 23,
+     *              "title": "魅族16",
+     *              "description": "<p>魅族16</p>",
+     *              "image": "/storage/images/201808070935375b6967e9e9dc4.jpeg",
+     *              "on_sale": true,
+     *              "product_classify_id": 2,
+     *              "rating": 5,
+     *              "sold_count": 0,
+     *              "review_count": 0,
+     *              "price": "0.00",
+     *              "productSkuAttribute": [
+     *                  {
+     *                      "id": 19,
+     *                      "product_id": 23,
+     *                      "name": "颜色",
+     *                      "_child": [
+     *                          "红色",
+     *                          "蓝色",
+     *                          "土黄色"
+     *                      ]
+     *                  },
+     *                  {
+     *                      "id": 20,
+     *                      "product_id": 23,
+     *                      "name": "制式",
+     *                      "_child": [
+     *                          "全网通",
+     *                          "联通版"
+     *                      ]
+     *                  },
+     *                  {
+     *                      "id": 21,
+     *                      "product_id": 23,
+     *                      "name": "内存",
+     *                      "_child": [
+     *                          "32g",
+     *                          "64g",
+     *                          "128g"
+     *                      ]
+     *                  },
+     *                  {
+     *                      "id": 22,
+     *                      "product_id": 23,
+     *                      "name": "套餐",
+     *                      "_child": [
+     *                          "官方标配",
+     *                          "套餐一"
+     *                      ]
+     *                  }
+     *              ],
+     *              "sku": {
+     *                  "id": 67,
+     *                  "title": "魅族16 128g",
+     *                  "description": "魅族16 128g",
+     *                  "attributes": "[{\"id\":19,\"value\":\"\\u571f\\u9ec4\\u8272\",\"name\":\"\\u989c\\u8272\"},{\"id\":20,\"value\":\"\\u5168\\u7f51\\u901a\",\"name\":\"\\u5236\\u5f0f\"},{\"id\":21,\"value\":\"128g\",\"name\":\"\\u5185\\u5b58\"},{\"id\":22,\"value\":\"\\u5b98\\u65b9\\u6807\\u914d\",\"name\":\"\\u5957\\u9910\"}]",
+     *                  "price": "3000.00",
+     *                  "stock": 11222,
+     *                  "product_id": 23,
+     *                  "created_at": null,
+     *                  "updated_at": null
+     *              },
+     *              "created_at": {
+     *                  "date": "2018-08-07 09:35:44.000000",
+     *                  "timezone_type": 3,
+     *                  "timezone": "UTC"
+     *              },
+     *              "updated_at": {
+     *                  "date": "2018-08-07 09:35:44.000000",
+     *                  "timezone_type": 3,
+     *                  "timezone": "UTC"
+     *              }
+     *          }
+     *      }
      */
-    public function products($id){
-        $id = intval($id,0);
-        if($id == 0){
-            return response(['status_code' => 1,'message' => 'ID不能为空'],422);
-        }
-        return Product::products($id);
+    public function products(ProductDetailRequest $request){
+        $args = $request->all();
+        return Product::products($args);
     }
 
     /**

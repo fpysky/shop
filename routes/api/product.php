@@ -20,6 +20,6 @@ $api->version('v1', function ($api) {
     $api->group([
         'namespace' => 'App\Http\Controllers\Api\V1'
     ], function ($api) {
-        $api->get('products/{id}', 'ProductController@products');//商品详情
+        $api->post('products', 'ProductController@products');//商品详情
     });
 });

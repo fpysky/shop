@@ -945,8 +945,8 @@ define({ "api": [
     "groupTitle": "商品"
   },
   {
-    "type": "get",
-    "url": "/api/products/{id}",
+    "type": "post",
+    "url": "/api/products",
     "title": "02.商品详情",
     "name": "products",
     "group": "06Product",
@@ -959,9 +959,23 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>M   商品ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "attributes",
+            "description": "<p>M   商品Sku属性</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "传参示例:",
+          "content": "{\n     \"id\":23,\n     \"attributes\":[\n         {\n             \"id\":19,\n             \"value\":\"土黄色\"\n         },\n         {\n             \"id\":20,\n             \"value\":\"全网通\"\n         },\n         {\n             \"id\":21,\n             \"value\":\"128g\"\n         },\n         {\n             \"id\":22,\n             \"value\":\"官方标配\"\n         }\n     ]\n }",
+          "type": "json"
+        }
+      ]
     },
     "error": {
       "examples": [
@@ -976,7 +990,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回",
-          "content": "HTTP/1.1 200\n {\n      \"status_code\": 0,\n      \"list\": {\n          \"product\": {\n              \"id\": 1,\n              \"title\": \"aliquid\",\n              \"description\": \"Iusto quia delectus quisquam est aut ducimus autem.\",\n              \"image\": \"https://lccdn.phphub.org/uploads/images/201806/01/5320/XrtIwzrxj7.jpg\",\n              \"on_sale\": true,\n              \"classify_id\": 2,\n              \"rating\": 3,\n              \"sold_count\": 0,\n              \"review_count\": 0,\n              \"price\": \"1018.00\",\n              \"created_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              },\n              \"updated_at\": {\n                  \"date\": \"2018-07-23 09:08:19.000000\",\n                  \"timezone_type\": 3,\n                  \"timezone\": \"UTC\"\n              }\n          },\n          \"productSkus\": [\n              {\n                  \"id\": 1,\n                  \"title\": \"vel\",\n                  \"description\": \"Rerum maiores eos eligendi dolorum qui corporis.\",\n                  \"price\": \"6127.00\",\n                  \"stock\": 13740,\n                  \"product_id\": 1,\n                  \"created_at\": {\n                      \"date\": \"2018-07-23 09:08:19.000000\",\n                      \"timezone_type\": 3,\n                      \"timezone\": \"UTC\"\n                  },\n                  \"updated_at\": {\n                      \"date\": \"2018-07-23 09:08:19.000000\",\n                      \"timezone_type\": 3,\n                      \"timezone\": \"UTC\"\n                  }\n              },\n          ...\n          ]\n      }\n  }",
+          "content": "HTTP/1.1 200\n {\n     \"status_code\": 0,\n     \"list\": {\n         \"id\": 23,\n         \"title\": \"魅族16\",\n         \"description\": \"<p>魅族16</p>\",\n         \"image\": \"/storage/images/201808070935375b6967e9e9dc4.jpeg\",\n         \"on_sale\": true,\n         \"product_classify_id\": 2,\n         \"rating\": 5,\n         \"sold_count\": 0,\n         \"review_count\": 0,\n         \"price\": \"0.00\",\n         \"productSkuAttribute\": [\n             {\n                 \"id\": 19,\n                 \"product_id\": 23,\n                 \"name\": \"颜色\",\n                 \"_child\": [\n                     \"红色\",\n                     \"蓝色\",\n                     \"土黄色\"\n                 ]\n             },\n             {\n                 \"id\": 20,\n                 \"product_id\": 23,\n                 \"name\": \"制式\",\n                 \"_child\": [\n                     \"全网通\",\n                     \"联通版\"\n                 ]\n             },\n             {\n                 \"id\": 21,\n                 \"product_id\": 23,\n                 \"name\": \"内存\",\n                 \"_child\": [\n                     \"32g\",\n                     \"64g\",\n                     \"128g\"\n                 ]\n             },\n             {\n                 \"id\": 22,\n                 \"product_id\": 23,\n                 \"name\": \"套餐\",\n                 \"_child\": [\n                     \"官方标配\",\n                     \"套餐一\"\n                 ]\n             }\n         ],\n         \"sku\": {\n             \"id\": 67,\n             \"title\": \"魅族16 128g\",\n             \"description\": \"魅族16 128g\",\n             \"attributes\": \"[{\\\"id\\\":19,\\\"value\\\":\\\"\\\\u571f\\\\u9ec4\\\\u8272\\\",\\\"name\\\":\\\"\\\\u989c\\\\u8272\\\"},{\\\"id\\\":20,\\\"value\\\":\\\"\\\\u5168\\\\u7f51\\\\u901a\\\",\\\"name\\\":\\\"\\\\u5236\\\\u5f0f\\\"},{\\\"id\\\":21,\\\"value\\\":\\\"128g\\\",\\\"name\\\":\\\"\\\\u5185\\\\u5b58\\\"},{\\\"id\\\":22,\\\"value\\\":\\\"\\\\u5b98\\\\u65b9\\\\u6807\\\\u914d\\\",\\\"name\\\":\\\"\\\\u5957\\\\u9910\\\"}]\",\n             \"price\": \"3000.00\",\n             \"stock\": 11222,\n             \"product_id\": 23,\n             \"created_at\": null,\n             \"updated_at\": null\n         },\n         \"created_at\": {\n             \"date\": \"2018-08-07 09:35:44.000000\",\n             \"timezone_type\": 3,\n             \"timezone\": \"UTC\"\n         },\n         \"updated_at\": {\n             \"date\": \"2018-08-07 09:35:44.000000\",\n             \"timezone_type\": 3,\n             \"timezone\": \"UTC\"\n         }\n     }\n }",
           "type": "json"
         }
       ]
