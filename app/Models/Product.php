@@ -58,6 +58,7 @@ class Product extends Model
                     $arr['description'] = $v['description'];
                     $arr['price'] = $v['price'];
                     $arr['stock'] = $v['stock'];
+                    $arr['images'] = json_encode($v['images']);
                     $arr['product_id'] = $v['product_id'];
                     $arrs = [];
                     foreach($v['attributes'] as $ks => $vs){

@@ -112,6 +112,18 @@
                 <p v-for="item in productForm.sku[index].attributes">
                     <span v-text="item.name + '：'"></span> <el-input :placeholder="item.name" style="width:70%;" v-model="item.value"></el-input>
                 </p>
+                <p>
+                    <span>展示图：</span>
+                    <el-upload
+                        action="/admin/uploadImage"
+                        list-type="picture-card"
+                        :file-list="sku.images"
+                        :on-preview="handlePictureCardPreview"
+                        :on-success="((res, file,fileList)=>{handleImagesSuccess(res, file,fileList,sku)})"
+                        :on-remove="handleRemove">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                </p>
                 <el-button style="margin-left:10px;" @click.prevent="removeSku(sku)">删除</el-button>
             </el-form-item>
             <el-form-item>
@@ -166,7 +178,8 @@
             errors:{},
             submiting:false,
             dialogImageUrl: '',
-            dialogVisible: false
+            dialogVisible: false,
+            fileList:{},
         },
         created(){
             this.getSecondRootClassify();
@@ -174,8 +187,8 @@
             this.getAttributes();
         },
         methods:{
-            handleImagesSuccess(res, file){
-                // this.productForm.image = file.response.path;
+            handleImagesSuccess(res, file,fileList,sku){
+                sku.images.push({"url":res.path});
             },
             handleRemove(file, fileList) {
                 // console.log(file, fileList);
@@ -197,6 +210,7 @@
                     stock:0,
                     product_id:{{$id}},
                     attributes:attributes,
+                    images:[],
                 });
             },
             removeSku(item){
@@ -248,7 +262,7 @@
                     ue.ready(function() { 
                         ue.setContent(res.data.list.product.description); 
                     });
-                    console.log(this.productForm);
+                    // console.log(this.productForm);
                 });
             },
             handleAvatarSuccess(res, file) {
