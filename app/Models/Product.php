@@ -24,14 +24,8 @@ class Product extends Model
         return $this->hasMany(ProductSku::class);
     }
 
-    // 与商品SKUATTRIBUTES关联
-    public function attrs()
-    {
-        return $this->hasMany(ProductSkuAttribute::class);
-    }
-
     public static function getProduct($id){
-        $product = Product::with('skus')->where('id','=',$id)->firstOrFail();
+        $product = Product::with(['productSkuAttribute','skus'])->where('id','=',$id)->firstOrFail();
         $list['product'] = new ProductResource($product);
         $list['productSkus'] = ProductSkuResource::collection($product->skus);
         return response(['static_code' => 0,'list' => $list]);

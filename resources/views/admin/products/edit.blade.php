@@ -65,6 +65,23 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
+            {{-- <el-form-item label="展示图：">
+                <div v-for="item in productForm.colorAttribute._child">
+                    <p><el-tag><span v-text="item"></span></el-tag></p>
+                    <el-upload
+                        action="/admin/uploadImage"
+                        list-type="picture-card"
+                        :on-preview="handlePictureCardPreview"
+                        :on-success="handleImagesSuccess"
+                        :on-remove="handleRemove">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <p style="color:#cccc;">
+                        ----------------------------------------------------------------------------------------------
+                        ----------------------------------------------------------------------------------------------
+                    </p>
+                </div>
+            </el-form-item> --}}
             <el-form-item label="商品描述：">
                 <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
                 <span V-if="error" v-text="errors.description[0]" style="color:#F56C6C"></span>
@@ -104,6 +121,9 @@
                 <el-button :loading="submiting" type="primary" @click="submitForm('productForm')">确定</el-button>
             </el-form-item>
         </el-form>
+        <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog>
     </div>
 </div>
 </body>
@@ -126,6 +146,8 @@
                     name: '',
                 }],
                 sku:[],
+                imageColor:'默认颜色',
+                colorAttribute:{},
             },
             productRules:{
                 title: [
@@ -143,6 +165,8 @@
             error:false,
             errors:{},
             submiting:false,
+            dialogImageUrl: '',
+            dialogVisible: false
         },
         created(){
             this.getSecondRootClassify();
@@ -150,6 +174,16 @@
             this.getAttributes();
         },
         methods:{
+            handleImagesSuccess(res, file){
+                // this.productForm.image = file.response.path;
+            },
+            handleRemove(file, fileList) {
+                // console.log(file, fileList);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
             addSku(){
                 this.productForm.attributes.forEach((item,index)=>{
                     item.value = '';
@@ -179,7 +213,6 @@
             getAttributes(){
                 axios.get('/admin/productSkuAttributes/'+this.productForm.id).then(res => {
                     this.productForm.attributes = res.data.list;
-                    console.log(this.productForm.attributes);
                 });
             },
             saveAttribute(attributes){
@@ -210,10 +243,12 @@
                     this.productForm.product_classify_id = res.data.list.product.product_classify_id;
                     this.productForm.image = res.data.list.product.image;
                     this.productForm.on_sale = res.data.list.product.on_sale;
+                    this.productForm.colorAttribute = res.data.list.product.colorAttribute[0];
                     this.productForm.sku = res.data.list.productSkus;
                     ue.ready(function() { 
                         ue.setContent(res.data.list.product.description); 
                     });
+                    console.log(this.productForm);
                 });
             },
             handleAvatarSuccess(res, file) {
@@ -232,12 +267,7 @@
                 });
             },
             handleRemove(file, fileList) {
-                console.log(file, fileList);
-            },
-            handlePictureCardPreview(file) {
-                this.imageDialogImageUrl = file.response.path;
-                console.log(this.imageDialogImageUrl);
-                this.imageDialogVisible = true;
+                // console.log(file, fileList);
             },
             handleSuccess(response, file, fileList){
                 this.productForm.image = file.response.path;
@@ -247,7 +277,6 @@
                 this.productForm.description = ue.getContent();
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        
                         this.submiting = false;
                         axios.put('/admin/products/'+this.productForm.id,this.productForm).then(res => {
                             this.submiting = false;
