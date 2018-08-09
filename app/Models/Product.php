@@ -48,12 +48,15 @@ class Product extends Model
             $product->image = $args['image'];
             $product->on_sale = $args['on_sale'];
             $product->product_classify_id = intval($args['product_classify_id']);
-            $product->save();
 
             //sku
             if(!empty($args['sku'])){
                 $insert = [];
+                $product->price = $args['sku'][0]['price'];
                 foreach($args['sku'] as $k => $v){
+                    if($v['price'] < $product->price){
+                        $product->price = $v['price'];
+                    }
                     $arr['title'] = $v['title'];
                     $arr['description'] = $v['description'];
                     $arr['price'] = $v['price'];
@@ -84,6 +87,7 @@ class Product extends Model
                     ProductSku::insert($insert);
                 }
             }
+            $product->save();
             return response(['status_code' => 0,'message' => '修改商品成功']);
         }
     }
