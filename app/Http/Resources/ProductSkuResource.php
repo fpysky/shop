@@ -19,6 +19,7 @@ class ProductSkuResource extends Resource
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
+            'color' => $this->color,
             'attributes' => json_decode($this->attributes,true),
             'images' => json_decode($this->images,true),
             'stock' => $this->stock,
