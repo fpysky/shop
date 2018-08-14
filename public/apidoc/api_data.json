@@ -1318,7 +1318,7 @@
   {
     "type": "get",
     "url": "/api/index/perimeterLife",
-    "title": "05.首页数码配件",
+    "title": "05.首页生活周边",
     "name": "perimeterLife",
     "group": "08Index",
     "success": {

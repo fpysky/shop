@@ -403,7 +403,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @api {get} /api/index/perimeterLife 05.首页数码配件
+     * @api {get} /api/index/perimeterLife 05.首页生活周边
      * @apiName perimeterLife
      * @apiGroup 08Index
      * @apiSuccessExample {json} 成功返回
