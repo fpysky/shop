@@ -46,7 +46,7 @@
 </style>
 <body>
     <div id="app">
-        <div style="width:60%;margin:0 auto;">
+        <div style="width:75%;margin:0 auto;">
             <el-form :model="productForm" :rules="productRules" ref="productForm" label-width="100px">
                 <el-form-item label="商品名称：" prop="title">
                     <el-input v-model="productForm.title" placeholder="商品名称"></el-input>
@@ -68,7 +68,7 @@
                     </el-upload>
                 </el-form-item>
                 <el-form-item label="商品描述：">
-                    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+                    <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
                     <span V-if="error" v-text="errors.description[0]" style="color:#F56C6C"></span>
                 </el-form-item>
                 <el-form-item label="是否上架：" prop="on_sale">

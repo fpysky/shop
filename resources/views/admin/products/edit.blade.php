@@ -44,7 +44,7 @@
 </style>
 <body>
 <div id="app">
-    <div style="width:60%;margin:0 auto;">
+    <div style="width:77%;margin:0 auto;">
         <el-form :model="productForm" :rules="productRules" ref="productForm" label-width="140px">
             <el-form-item label="商品名称：" prop="title">
                 <el-input v-model="productForm.title" placeholder="商品名称"></el-input>
@@ -65,25 +65,27 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </el-form-item>
-            {{-- <el-form-item label="展示图：">
-                <div v-for="item in productForm.colorAttribute._child">
-                    <p><el-tag><span v-text="item"></span></el-tag></p>
+            <el-form-item label="展示图：">
+                <p>
+                    <el-input v-model="imagesValue" style="width:140px;" placeholder="输入颜色"></el-input>
+                    <el-button icon="el-icon-plus" @click="addImages(imagesValue)">添加</el-button>
+                    <el-button @click="updateColor" type="primary">保存</el-button> <span style="color:#F56C6C">(需要保存才能执行添加sku操作)</span>
+                </p>
+                <p v-for="(item,index) in productForm.images">
+                    <el-tag v-text="item.value"></el-tag>
                     <el-upload
                         action="/admin/uploadImage"
                         list-type="picture-card"
+                        :file-list="item.images"
                         :on-preview="handlePictureCardPreview"
-                        :on-success="handleImagesSuccess"
+                        :on-success="((res, file,fileList)=>{handleImagesSuccess(res, file,fileList,item)})"
                         :on-remove="handleRemove">
                         <i class="el-icon-plus"></i>
                     </el-upload>
-                    <p style="color:#cccc;">
-                        ----------------------------------------------------------------------------------------------
-                        ----------------------------------------------------------------------------------------------
-                    </p>
-                </div>
-            </el-form-item> --}}
+                </p>
+            </el-form-item>
             <el-form-item label="商品描述：">
-                <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+                <script id="editor" type="text/plain" style="100%;height:500px;"></script>
                 <span V-if="error" v-text="errors.description[0]" style="color:#F56C6C"></span>
             </el-form-item>
             <el-form-item label="是否上架：" prop="on_sale">
@@ -109,20 +111,18 @@
                 <p><span>描述：</span> <el-input placeholder="描述" style="width:70%;" v-model="sku.description"></el-input></p>
                 <p><span>价格：</span> <el-input placeholder="价格" style="width:70%;" v-model="sku.price"></el-input></p>
                 <p><span>库存：</span> <el-input placeholder="库存" style="width:70%;" v-model="sku.stock"></el-input></p>
+                <p><span>颜色：</span>
+                    <el-select style="width:70%;" v-model="sku.color" placeholder="请选择颜色">
+                        <el-option
+                          v-for="item in productForm.images"
+                          :key="item.value"
+                          :label="item.value"
+                          :value="item.value">
+                        </el-option>
+                    </el-select>
+                </p>
                 <p v-for="item in productForm.sku[index].attributes">
                     <span v-text="item.name + '：'"></span> <el-input :placeholder="item.name" style="width:70%;" v-model="item.value"></el-input>
-                </p>
-                <p>
-                    <span>展示图：</span>
-                    <el-upload
-                        action="/admin/uploadImage"
-                        list-type="picture-card"
-                        :file-list="sku.images"
-                        :on-preview="handlePictureCardPreview"
-                        :on-success="((res, file,fileList)=>{handleImagesSuccess(res, file,fileList,sku)})"
-                        :on-remove="handleRemove">
-                        <i class="el-icon-plus"></i>
-                    </el-upload>
                 </p>
                 <el-button style="margin-left:10px;" @click.prevent="removeSku(sku)">删除</el-button>
             </el-form-item>
@@ -158,8 +158,8 @@
                     name: '',
                 }],
                 sku:[],
-                imageColor:'默认颜色',
                 colorAttribute:{},
+                images:[],
             },
             productRules:{
                 title: [
@@ -180,6 +180,7 @@
             dialogImageUrl: '',
             dialogVisible: false,
             fileList:{},
+            imagesValue:'',
         },
         created(){
             this.getSecondRootClassify();
@@ -187,9 +188,17 @@
             this.getAttributes();
         },
         methods:{
-            handleImagesSuccess(res, file,fileList,sku){
-                sku.images.push({"url":res.path});
+            updateColor(){
+                axios.put('/admin/products/updateColor/'+this.productForm.id,{images:this.productForm.images}).then(res => {
+                    this.$message.success('添加颜色成功');
+                }).catch(error =>{});
             },
+            handleImagesSuccess(res, file,fileList,images){
+                images.images.push({"url":res.path});
+            },
+            // handleImagesSuccess(res, file,fileList,sku){
+            //     sku.images.push({"url":res.path});
+            // },
             handleRemove(file, fileList) {
                 // console.log(file, fileList);
             },
@@ -208,8 +217,16 @@
                     description:'',
                     price:0.00,
                     stock:0,
+                    color:'',
                     product_id:{{$id}},
                     attributes:attributes,
+                    images:[],
+                });
+            },
+            addImages(value){
+                // console.log(this.productForm);
+                this.productForm.images.push({
+                    value:value,
                     images:[],
                 });
             },
@@ -256,14 +273,14 @@
                     this.productForm.title = res.data.list.product.title;
                     this.productForm.product_classify_id = res.data.list.product.product_classify_id;
                     this.productForm.image = res.data.list.product.image;
+                    this.productForm.images = res.data.list.product.images;
                     this.productForm.on_sale = res.data.list.product.on_sale;
-                    this.productForm.colorAttribute = res.data.list.product.colorAttribute[0];
                     this.productForm.sku = res.data.list.productSkus;
                     ue.ready(function() { 
                         ue.setContent(res.data.list.product.description); 
                     });
-                    // console.log(this.productForm);
                 });
+                console.log(this.productForm);
             },
             handleAvatarSuccess(res, file) {
                 this.productForm.image = file.response.path;
@@ -292,6 +309,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.submiting = false;
+                        // console.log(this.productForm);return;
                         axios.put('/admin/products/'+this.productForm.id,this.productForm).then(res => {
                             this.submiting = false;
                             window.location.href = "/admin/products";

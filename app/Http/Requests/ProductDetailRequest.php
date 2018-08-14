@@ -8,7 +8,8 @@ class ProductDetailRequest extends Request
     {
         return [
             'id' => 'required|Integer',
-            'attributes' => 'required'
+            'attributes' => 'required',
+            'color' => 'required'
         ];
     }
 }

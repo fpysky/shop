@@ -60,21 +60,23 @@ class ProductController extends Controller
      * @apiGroup 06Product
      *
      * @apiParam {Number} id             M   商品ID
-     * @apiParam {Number} attributes     M   商品Sku属性
+     * @apiParam {Array} attributes      M   商品Sku属性
+     * @apiParam {String} color          M   商品颜色
      *
      * @apiParamExample {json} 传参示例:
      *     {
-     *          "id":21,
+     *          "id":22,
      *          "attributes":[
      *              {
-     *                  "id":1,
-     *                  "value":"白色"
+     *                  "id":3,
+     *                  "value":"全网公开版"
      *              },
      *              {
-     *                  "id":2,
-     *                  "value":"128g+4g"
+     *                  "id":4,
+     *                  "value":"6+64GB"
      *              }
-     *          ]
+     *          ],
+     *          "color":"静夜黑"
      *      }
      *
      * @apiErrorExample {json} 错误返回
@@ -89,60 +91,113 @@ class ProductController extends Controller
      *     {
      *          "status_code": 0,
      *          "list": {
-     *          "id": 21,
-     *          "title": "魅族15",
-     *          "description": "<p>魅族15</p>",
-     *          "image": "/storage/images/201808090313065b6bb14299e41.jpeg",
-     *          "on_sale": true,
-     *          "product_classify_id": 2,
-     *          "rating": 5,
-     *          "sold_count": 0,
-     *          "review_count": 0,
-     *          "price": "0.00",
-     *          "productSkuAttribute": [
-     *              {
-     *                  "id": 1,
-     *                  "product_id": 21,
-     *                  "name": "颜色分类",
-     *                  "_child": [
-     *                      "白色",
-     *                      "灰色"
-     *                  ]
+     *              "id": 22,
+     *              "title": "魅族16th",
+     *              "description": "<p><img src=\"/ueditor/php/upload/image/20180814/1534234382823326.jpg\" title=\"1534234382823326.jpg\" alt=\"xiangqing1.jpg\"/></p>",
+     *              "image": "/storage/images/201808140812535b728f054ed21.jpeg",
+     *              "images": [
+     *                  {
+     *                      "value": "远山白",
+     *                      "images": [
+     *                          {
+     *                              "url": "/storage/images/201808140822045b72912cbe18c.jpeg",
+     *                              "uid": 1534234923201,
+     *                              "status": "success"
+     *                          },
+     *                          {
+     *                              "url": "/storage/images/201808140822075b72912f13455.jpeg",
+     *                              "uid": 1534234925496,
+     *                              "status": "success"
+     *                          },
+     *                          {
+     *                              "url": "/storage/images/201808140822085b729130d15bc.jpeg",
+     *                              "uid": 1534234927276,
+     *                              "status": "success"
+     *                          },
+     *                          {
+     *                              "url": "/storage/images/201808140822105b729132566a8.jpeg",
+     *                              "uid": 1534234928779,
+     *                              "status": "success"
+     *                          }
+     *                      ]
+     *                  },
+     *                  {
+     *                      "value": "静夜黑",
+     *                      "images": [
+     *                          {
+     *                              "url": "/storage/images/201808140822235b72913f5222f.jpeg",
+     *                              "uid": 1534234941787,
+     *                              "status": "success"
+     *                          },
+     *                          {
+     *                              "url": "/storage/images/201808140822255b72914104417.jpeg",
+     *                              "uid": 1534234943431,
+     *                              "status": "success"
+     *                          },
+     *                          {
+     *                              "url": "/storage/images/201808140822265b729142f24af.jpeg",
+     *                              "uid": 1534234945411,
+     *                              "status": "success"
+     *                          },
+     *                          {
+     *                              "url": "/storage/images/201808140822285b729144e87c5.jpeg",
+     *                              "uid": 1534234947372,
+     *                              "status": "success"
+     *                          }
+     *                      ]
+     *                  }
+     *              ],
+     *              "on_sale": true,
+     *              "product_classify_id": 2,
+     *              "rating": 5,
+     *              "sold_count": 0,
+     *              "review_count": 0,
+     *              "price": "2698.00",
+     *              "productSkuAttribute": [
+     *                  {
+     *                      "id": 3,
+     *                      "product_id": 22,
+     *                      "name": "网络制式",
+     *                      "_child": [
+     *                          "全网公开版"
+     *                      ]
+     *                  },
+     *                  {
+     *                      "id": 4,
+     *                      "product_id": 22,
+     *                      "name": "内存容量",
+     *                      "_child": [
+     *                          "6+64GB",
+     *                          "6+128GB",
+     *                          "8+128GB"
+     *                      ]
+     *                  }
+     *              ],
+     *              "sku": {
+     *                  "id": 64,
+     *                  "title": "魅族16th 静夜黑",
+     *                  "description": "魅族16th 静夜黑",
+     *                  "attributes": "[{\"id\":3,\"value\":\"\\u5168\\u7f51\\u516c\\u5f00\\u7248\",\"name\":\"\\u7f51\\u7edc\\u5236\\u5f0f\"},{\"id\":4,\"value\":\"6+64GB\",\"name\":\"\\u5185\\u5b58\\u5bb9\\u91cf\"}]",
+     *                  "color": "静夜黑",
+     *                  "images": "[]",
+     *                  "price": "2698.00",
+     *                  "stock": 10000,
+     *                  "product_id": 22,
+     *                  "created_at": null,
+     *                  "updated_at": null
      *              },
-     *              {
-     *                  "id": 2,
-     *                  "product_id": 21,
-     *                  "name": "内存组合",
-     *                  "_child": [
-     *                      "128g+4g",
-     *                      "256g+8g"
-     *                  ]
+     *              "created_at": {
+     *                  "date": "2018-08-14 08:13:06.000000",
+     *                  "timezone_type": 3,
+     *                  "timezone": "UTC"
+     *              },
+     *              "updated_at": {
+     *                  "date": "2018-08-14 08:33:58.000000",
+     *                  "timezone_type": 3,
+     *                  "timezone": "UTC"
      *              }
-     *          ],
-     *          "sku": {
-     *              "id": 61,
-     *              "title": "魅族15 64g 白色",
-     *              "description": "魅族15 64g 白色",
-     *              "attributes": "[{\"id\":1,\"value\":\"\\u767d\\u8272\",\"name\":\"\\u989c\\u8272\\u5206\\u7c7b\"},{\"id\":2,\"value\":\"128g+4g\",\"name\":\"\\u5185\\u5b58\\u7ec4\\u5408\"}]",
-     *              "images": "[{\"url\":\"\\/storage\\/images\\/201808090620115b6bdd1b4f5c8.png\"},{\"url\":\"\\/storage\\/images\\/201808090620135b6bdd1da1f60.jpeg\"},{\"url\":\"\\/storage\\/images\\/201808090620155b6bdd1fe8097.jpeg\"},{\"url\":\"\\/storage\\/images\\/201808090620185b6bdd2278e81.png\"}]",
-     *              "price": "2399.00",
-     *              "stock": 1223,
-     *              "product_id": 21,
-     *              "created_at": null,
-     *              "updated_at": null
-     *          },
-     *          "created_at": {
-     *              "date": "2018-08-09 03:13:13.000000",
-     *              "timezone_type": 3,
-     *              "timezone": "UTC"
-     *          },
-     *          "updated_at": {
-     *              "date": "2018-08-09 03:13:13.000000",
-     *              "timezone_type": 3,
-     *              "timezone": "UTC"
      *          }
      *      }
-     *  }
      */
     public function products(ProductDetailRequest $request){
         $args = $request->all();

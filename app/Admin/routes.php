@@ -21,6 +21,7 @@ Route::group([
     $router->put('products/{id}', 'ProductsController@update');
     $router->delete('products/{id}','ProductsController@destroy');
     $router->get('products/getAllSellProduct', 'ProductsController@getAllSellProduct');
+    $router->put('products/updateColor/{id}', 'ProductsController@updateColor');//保存商品颜色
     //商品sku类别
     $router->get('productSkuAttributes/{productId}', 'ProductSkuAttributesController@getData');
     $router->post('productSkuAttributes', 'ProductSkuAttributesController@store');

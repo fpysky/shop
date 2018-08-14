@@ -37,6 +37,7 @@ class Product extends Model
             $product->title = $args['title'];
             $product->description = $args['description'];
             $product->image = $args['image'];
+            $product->images = json_encode($args['images']);
             $product->on_sale = $args['on_sale'];
             $product->product_classify_id = intval($args['product_classify_id']);
             $product->save();
@@ -46,6 +47,7 @@ class Product extends Model
             $product->title = $args['title'];
             $product->description = $args['description'];
             $product->image = $args['image'];
+            $product->images = json_encode($args['images']);
             $product->on_sale = $args['on_sale'];
             $product->product_classify_id = intval($args['product_classify_id']);
 
@@ -60,6 +62,7 @@ class Product extends Model
                     $arr['title'] = $v['title'];
                     $arr['description'] = $v['description'];
                     $arr['price'] = $v['price'];
+                    $arr['color'] = $v['color'];
                     $arr['stock'] = $v['stock'];
                     $arr['images'] = json_encode($v['images']);
                     $arr['product_id'] = $v['product_id'];
@@ -90,6 +93,13 @@ class Product extends Model
             $product->save();
             return response(['status_code' => 0,'message' => '修改商品成功']);
         }
+    }
+
+    public static function updateColor($args){
+        $product = Product::find(intval($args['id']));
+        $product->images = json_encode($args['images']);
+        $product->save();
+        return response(['status_code' => 0,'message' => '添加颜色分类成功']);
     }
 
     public function getImageUrlAttribute()

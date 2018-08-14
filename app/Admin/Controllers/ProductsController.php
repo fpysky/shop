@@ -11,6 +11,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -33,6 +34,12 @@ class ProductsController extends Controller
         $args = $request->all();
         $args['id'] = 0;
         return Product::store($args);
+    }
+
+    public function updateColor($id,Request $request){
+        $args = $request->all();
+        $args['id'] = $id;
+        return Product::updateColor($args);
     }
 
     public function update($id,ProductRequest $request){

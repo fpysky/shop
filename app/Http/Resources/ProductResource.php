@@ -19,6 +19,7 @@ class ProductResource extends Resource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
+            'images' => empty($this->images)? [] : json_decode($this->images,true),
             'on_sale' => $this->on_sale,
             'product_classify_id' => $this->product_classify_id,
             'rating' => $this->rating,

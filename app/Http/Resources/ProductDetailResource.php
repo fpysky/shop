@@ -20,6 +20,7 @@ class ProductDetailResource extends Resource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
+            'images' => json_decode($this->images,true),
             'on_sale' => $this->on_sale,
             'product_classify_id' => $this->product_classify_id,
             'rating' => $this->rating,
@@ -46,6 +47,9 @@ class ProductDetailResource extends Resource
                         }
                     }
                 }
+            }
+            if($args['color'] != $item->color){
+                $bool = false;
             }
             if($bool){
                 $sku = $item;
