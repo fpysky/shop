@@ -304,7 +304,6 @@
                 this.productForm.description = ue.getContent();
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.submiting = false; 
                         axios.put('/admin/products/'+this.productForm.id,this.productForm).then(res => {
                             this.submiting = false;
                             window.location.href = "/admin/products";

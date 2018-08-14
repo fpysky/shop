@@ -37,7 +37,7 @@ class Product extends Model
             $product->title = $args['title'];
             $product->description = $args['description'];
             $product->image = $args['image'];
-            $product->images = json_encode($args['images']);
+            $product->images = isset($args['images'])?json_encode($args['images']):'';
             $product->on_sale = $args['on_sale'];
             $product->product_classify_id = intval($args['product_classify_id']);
             $product->save();
