@@ -195,10 +195,7 @@
             },
             handleImagesSuccess(res, file,fileList,images){
                 images.images.push({"url":res.path});
-            },
-            // handleImagesSuccess(res, file,fileList,sku){
-            //     sku.images.push({"url":res.path});
-            // },
+            }, 
             handleRemove(file, fileList) {
                 // console.log(file, fileList);
             },
@@ -223,8 +220,7 @@
                     images:[],
                 });
             },
-            addImages(value){
-                // console.log(this.productForm);
+            addImages(value){ 
                 this.productForm.images.push({
                     value:value,
                     images:[],
@@ -308,8 +304,7 @@
                 this.productForm.description = ue.getContent();
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.submiting = false;
-                        // console.log(this.productForm);return;
+                        this.submiting = false; 
                         axios.put('/admin/products/'+this.productForm.id,this.productForm).then(res => {
                             this.submiting = false;
                             window.location.href = "/admin/products";
