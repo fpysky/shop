@@ -204,25 +204,12 @@ class AuthController extends Controller
      *       "status_code":0
      *     }
      */
-//    public function user()
-//    {
-//        return User::user();
-//    }
     public function user(Request $request){
         $user = $request->user('api');
+        if(empty($user)){
+            return response(['status_code' => 401,'message' => 'Unauthorized'],401);
+        }
         return response(['status_code' => 0,'user' => $user]);
-    }
-
-    /**
-     * @api {get} /api/auth/refresh 03.刷新token
-     * @apiName refresh
-     * @apiGroup 02Auth
-     */
-    public function refresh()
-    {
-        return response([
-            'status' => 'success'
-        ]);
     }
 
     /**
