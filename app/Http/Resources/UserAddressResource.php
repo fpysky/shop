@@ -24,6 +24,7 @@ class UserAddressResource extends Resource
             'zip' => $this->zip,
             'contact_name' => $this->contact_name,
             'contact_phone' => $this->contact_phone,
+            'is_default' => $this->is_default,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

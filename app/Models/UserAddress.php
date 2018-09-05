@@ -39,34 +39,58 @@ class UserAddress extends Model
     }
 
     public static function store($args){
+        $id = 0;
         if($args['id'] == 0){
-            $userAddress = new UserAddress();
-            $userAddress->user_id = $args['user_id'];
-            $userAddress->province = intval($args['province']);
-            $userAddress->city = intval($args['city']);
-            $userAddress->district = intval($args['district']);
-            $userAddress->address = $args['address'];
-            $userAddress->zip = intval($args['zip']);
-            $userAddress->contact_name = $args['contact_name'];
-            $userAddress->contact_phone = $args['contact_phone'];
-            $userAddress->save();
+            $insertData = [
+                'user_id' => $args['user_id'],
+                'province' => intval($args['province']),
+                'city' => intval($args['city']),
+                'district' => intval($args['district']),
+                'address' => $args['address'],
+                'zip' => intval($args['zip']),
+                'contact_name' => $args['contact_name'],
+                'contact_phone' => $args['contact_phone']
+            ];
+            if(isset($args['is_default'])){
+                $insertData['is_default'] = $args['is_default'];
+            }
+            $id = UserAddress::insertGetId($insertData);
+//            $userAddress = new UserAddress();
+//            $userAddress->user_id = $args['user_id'];
+//            $userAddress->province = intval($args['province']);
+//            $userAddress->city = intval($args['city']);
+//            $userAddress->district = intval($args['district']);
+//            $userAddress->address = $args['address'];
+//            $userAddress->zip = intval($args['zip']);
+//            if(isset($args['is_default'])){
+//                $userAddress->is_default = $args['is_default'];
+//            }
+//            $userAddress->contact_name = $args['contact_name'];
+//            $userAddress->contact_phone = $args['contact_phone'];
+//            $userAddress->save();
         }else{
+            $id = $args['id'];
             $userAddress = UserAddress::where('id','=',$args['id'])->firstOrFail();
             $userAddress->province = intval($args['province']);
             $userAddress->city = intval($args['city']);
             $userAddress->district = intval($args['district']);
             $userAddress->address = $args['address'];
             $userAddress->zip = intval($args['zip']);
+            if(isset($args['is_default'])){
+                $userAddress->is_default = $args['is_default'];
+            }
             $userAddress->contact_name = $args['contact_name'];
             $userAddress->contact_phone = $args['contact_phone'];
             $userAddress->save();
         }
+        if(isset($args['is_default']) && $args['is_default']){
+            UserAddress::where('id','<>',$id)->update(['is_default' => 0]);
+        }
         return response(['status_code' => 0,'message' => '操作成功']);
     }
 
-    public static function destroy($id){
-        $userAddress = UserAddress::where('id','=',$id)->firstOrFail();
-        $userAddress->delete();
+    public static function destroy($args){
+        UserAddress::whereIn('id',$args['ids'])->delete();
         return response(['status_code' => 0,'message' => '操作成功']);
     }
 }

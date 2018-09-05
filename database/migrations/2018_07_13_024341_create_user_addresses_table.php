@@ -25,6 +25,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('contact_name');
             $table->string('contact_phone');
             $table->unsignedInteger('last_used_at')->nullable();
+            $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });
     }
