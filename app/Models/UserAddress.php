@@ -55,19 +55,6 @@ class UserAddress extends Model
                 $insertData['is_default'] = $args['is_default'];
             }
             $id = UserAddress::insertGetId($insertData);
-//            $userAddress = new UserAddress();
-//            $userAddress->user_id = $args['user_id'];
-//            $userAddress->province = intval($args['province']);
-//            $userAddress->city = intval($args['city']);
-//            $userAddress->district = intval($args['district']);
-//            $userAddress->address = $args['address'];
-//            $userAddress->zip = intval($args['zip']);
-//            if(isset($args['is_default'])){
-//                $userAddress->is_default = $args['is_default'];
-//            }
-//            $userAddress->contact_name = $args['contact_name'];
-//            $userAddress->contact_phone = $args['contact_phone'];
-//            $userAddress->save();
         }else{
             $id = $args['id'];
             $userAddress = UserAddress::where('id','=',$args['id'])->firstOrFail();
