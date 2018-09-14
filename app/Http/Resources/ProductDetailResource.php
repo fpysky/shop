@@ -18,6 +18,7 @@ class ProductDetailResource extends Resource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'desc' => $this->desc,
             'description' => $this->description,
             'image' => $this->image,
             'images' => json_decode($this->images,true),
@@ -28,34 +29,44 @@ class ProductDetailResource extends Resource
             'review_count' => $this->review_count,
             'price' => $this->price,
             'productSkuAttribute' => $this->getProductSkuAttribute($this->productSkuAttribute,$this->skus),
-            'sku' => $this->getSku($args,$this->skus),
+            'sku' => $this->getSku($args,$this->skus,$this->price),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }
 
-    protected function getSku($args,$skus){
-        $sku = collect();
-        $skus->each(function ($item,$key) use ($args,&$sku){
-            $bool = true;
-            $attributes = json_decode($item->attributes,true);
-            foreach($attributes as $k => $v){
-                foreach($args['attributes'] as $ks => $vs){
-                    if($v['id'] == $vs['id']){
-                        if(!($v['value'] == $vs['value'])){
-                            $bool = false;
+    protected function getSku($args,$skus,$price){
+        if(isset($args['attributes']) && !empty($args['attributes'])){
+            $sku = collect();
+            $skus->each(function ($item,$key) use ($args,&$sku){
+                $bool = true;
+                $attributes = json_decode($item->attributes,true);
+                foreach($attributes as $k => $v){
+                    foreach($args['attributes'] as $ks => $vs){
+                        if($v['id'] == $vs['id']){
+                            if(!($v['value'] == $vs['value'])){
+                                $bool = false;
+                            }
                         }
                     }
                 }
-            }
-            if($args['color'] != $item->color){
-                $bool = false;
-            }
-            if($bool){
-                $sku = $item;
-            }
-        });
-        return $sku;
+                if($args['color'] != $item->color){
+                    $bool = false;
+                }
+                if($bool){
+                    $sku = $item;
+                }
+            });
+            return $sku;
+        }else{
+            $sku = collect();
+            $skus->each(function ($item,$key) use ($price,&$sku){
+                if($item->price == $price){
+                    $sku = $item;
+                }
+            });
+            return $sku;
+        }
     }
 
     protected function getProductSkuAttribute($productSkuAttribute,$skus){

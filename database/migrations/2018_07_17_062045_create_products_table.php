@@ -12,6 +12,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
+            $table->string('desc')->nullable();
             $table->string('image');
             $table->text('images')->nullable();
             $table->boolean('on_sale')->default(true);

@@ -42,4 +42,9 @@ class User extends Authenticatable
             'message' => '',
         ]);
     }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

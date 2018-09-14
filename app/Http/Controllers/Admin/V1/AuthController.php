@@ -10,6 +10,9 @@ class AuthController extends Controller
 {
     public function user(Request $request){
         $user = $request->user('admin');
+        if(empty($user)){
+            return response(['status_code' => 500,'message' => 'Unauthenticated.'],500);
+        }
         $roles = Role::getAdminerRoles($user->id);
         return response(['status_code' => 0,'user' => $user,'roles' => $roles]);
     }

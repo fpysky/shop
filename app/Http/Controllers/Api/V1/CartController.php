@@ -150,10 +150,10 @@ class CartController extends Controller
      *          "message": "找不到该购物车商品"
      *     }
      * */
-    public function update($id,Request $request){
-        $args['id'] = intval($id,0);
-        $args['amount'] = $request->input('amount',0);
-        $args['amount'] = intval($args['amount'],0);
+    public function update(Request $request){
+        $args = $request->all();
+        $args['id'] = intval($args['id']);
+        $args['amount'] = intval($args['amount']);
         if($args['id'] == 0){
             return response(['status_code' => 1,'message' => '购物车商品ID不能为空'],422);
         }

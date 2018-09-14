@@ -11,6 +11,7 @@ class ProductRequest extends Request
             'description' => 'required|string',
             'image' => 'required|string',
             'on_sale' => 'required',
+            'desc' => 'required',
             'product_classify_id' => 'required|Integer',
         ];
     }

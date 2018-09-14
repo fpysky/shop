@@ -19,7 +19,7 @@ class CreateProductSkusTable extends Migration
             $table->string('description')->nullable();
             $table->text('attributes')->nullable();
             $table->string('color')->nullable();
-            $table->text('images')->nullable();
+            $table->string('image')->nullable();
             $table->decimal('price', 10, 2);
             $table->unsignedInteger('stock');
             $table->unsignedInteger('product_id');

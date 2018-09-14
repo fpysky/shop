@@ -17,6 +17,7 @@ class ProductResource extends Resource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'desc' => $this->desc,
             'description' => $this->description,
             'image' => $this->image,
             'images' => empty($this->images)? [] : json_decode($this->images,true),

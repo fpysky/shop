@@ -53,13 +53,8 @@ class Product extends Model
             $product = new Product();
             $product->title = $args['title'];
             $product->description = $args['description'];
+            $product->desc = $args['desc'];
             $product->image = strstr($args['image'],'/storage');
-//            foreach($args['images'] as  $ks=>$vs){
-//                foreach($args['images'][$ks]['images'] as $k=>$v){
-//                    $args['images'][$ks]['images'][$k]['url'] = strstr($args['images'][$ks]['images'][$k]['url'],'/storage');
-//                }
-//            }
-//            $product->images = isset($args['images'])?json_encode($args['images']):'';
             $product->on_sale = $args['on_sale'];
             $product->product_classify_id = intval($args['product_classify_id']);
             $product->save();
@@ -67,6 +62,7 @@ class Product extends Model
         }else{
             $product = Product::find(intval($args['id']));
             $product->title = $args['title'];
+            $product->desc = $args['desc'];
             $product->description = $args['description'];
             $product->image = strstr($args['image'],'/storage');
             foreach($args['images'] as  $ks=>$vs){
@@ -91,7 +87,11 @@ class Product extends Model
                     $arr['price'] = $v['price'];
                     $arr['color'] = $v['color'];
                     $arr['stock'] = $v['stock'];
-                    $arr['images'] = json_encode($v['images']);
+                    foreach($args['images'] as $kt => $vt){
+                        if($vt['value'] == $v['color']){
+                            $arr['image'] = $vt['images'][0]['url'];
+                        }
+                    }
                     $arr['product_id'] = $v['product_id'];
                     $arrs = [];
                     foreach($v['attributes'] as $ks => $vs){
@@ -197,9 +197,9 @@ class Product extends Model
 
     //获取手机产品列表
     public static function mobilePhones(){
-        $list = Product::where('on_sale','=',1)->whereIn('classify_id',function($query){
+        $list = Product::where('on_sale','=',1)->whereIn('product_classify_id',function($query){
             $query->select(['id'])->from('product_classifies')->where('pid','=',1);
-        })->take(10)->get();
+        })->take(8)->orderBy('created_at','desc')->get();
         $list = ProductResource::collection($list);
         return response(['status_code' => 0,'list' => $list]);
     }
