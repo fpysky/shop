@@ -145,7 +145,7 @@ class Order extends Model
                 $item->save();
                 $totalAmount += $sku->price * $data['amount'];
                 if ($sku->decreaseStock($data['amount']) <= 0) {
-                    throw new InvalidValidateException('该商品库存不足');
+                    throw new \Exception('该商品库存不足');
                 }
             }
 

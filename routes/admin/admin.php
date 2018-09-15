@@ -73,5 +73,7 @@ $api->version('v1', function ($api) {
         $api->get('productSkuAttributes/{productId}', 'ProductSkuAttributesController@getData');
         $api->post('productSkuAttributes', 'ProductSkuAttributesController@store');
         $api->delete('productSkuAttributes/{id}', 'ProductSkuAttributesController@destroy');
+
+        $api->delete('productSku', 'ProductSkuController@destroy');
     });
 });

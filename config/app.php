@@ -1,7 +1,8 @@
 <?php
 
 return [
-
+    'order_ttl' => 1800,//关闭订单执行秒数
+    'alipay_return_url' => 'http://localhost:8080',
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -52,7 +53,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://shop.test'),
 
     /*
     |--------------------------------------------------------------------------

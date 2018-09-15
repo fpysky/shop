@@ -16,8 +16,9 @@ class PaymentController extends Controller
      *
      * @apiParam {Number}  id    M 订单ID
      */
-    public function payByAlipay($id, Request $request)
+    public function payByAlipay($id)
     {
+        $id = intval($id);
         $order = Order::where('id','=',$id)->first();
         if(empty($order)){
             return response(['status_code' => 1,'message' => '找不到此订单']);
@@ -26,7 +27,7 @@ class PaymentController extends Controller
         // $this->authorize('own', $order);
         // 订单已支付或者已关闭
         if ($order->paid_at || $order->closed) {
-            throw new InvalidRequestException('订单状态不正确');
+            throw new \Exception('订单状态不正确');
         }
 
         // 调用支付宝的网页支付

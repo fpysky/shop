@@ -124,7 +124,20 @@ class Product extends Model
 
     public static function updateColor($args){
         $product = Product::find(intval($args['id']));
-        $product->images = json_encode($args['images']);
+        $images = [];
+        foreach($args['images'] as $k => $v){
+            $r = [];
+            $r['value'] = $v['value'];
+            foreach($v['images'] as $ks => $vs){
+                $rs = [];
+                $rs['url'] = strstr($vs['url'],'/storage');
+                $r['images'][] = $rs;
+                unset($rs);
+            }
+            $images[] = $r;
+            unset($r);
+        }
+        $product->images = json_encode($images);
         $product->save();
         return response(['status_code' => 0,'message' => '添加颜色分类成功']);
     }

@@ -27,4 +27,10 @@ class ProductSku extends Model
         }
         $this->increment('stock', $amount);
     }
+
+    public static function destroy($id)
+    {
+        ProductSku::where('id','=',$id)->delete();
+        return response(['status_code' => 0,'message' => '删除sku成功']);
+    }
 }

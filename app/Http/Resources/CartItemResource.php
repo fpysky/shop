@@ -17,7 +17,6 @@ class CartItemResource extends Resource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'product_sku_id' => $this->product_sku_id,
             'amount' => $this->amount,
             'productSku' => !empty($this->productSku)?$this->productSku:''
         ];
