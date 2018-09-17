@@ -19,11 +19,11 @@ class ProductClassify extends Model
 
     public function product()
     {
-        return $this->hasMany(Product::class,'product_classify_id','id');
+        return $this->hasMany(Product::class,'product_classify_id','id')->limit(5)->orderBy('created_at','desc');
     }
 
     public static function getProductClassify(){
-        $root = ProductClassify::getRootClassify();
+        $root = ProductClassify::select(['id','name'])->where('pid','=',0)->get()->toArray();
         $list = array();
         foreach($root as $k => $v){
             $r = $v;

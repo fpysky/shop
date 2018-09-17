@@ -12,5 +12,6 @@ $api->version('v1', function ($api) {
         $api->delete('cart/{id}','CartController@remove');//从购物车移除商品
         $api->put('cart','CartController@update');//更新购物车商品
         $api->post('cart/settle','CartController@settle');//结算
+        $api->get('cart/num','CartController@getCartNum');//获取购物车商品数量
     });
 });

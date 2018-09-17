@@ -16,6 +16,10 @@ class CartController extends Controller
      * 购物车
      */
 
+    public function getCartNum(){
+        return CartItem::getCartNum();
+    }
+
     /**
      * @api {post} /api/cart 01.加入购物车
      * @apiName add

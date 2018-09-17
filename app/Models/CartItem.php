@@ -21,6 +21,11 @@ class CartItem extends Model
         return $this->belongsTo(ProductSku::class);
     }
 
+    public static function getCartNum(){
+        $num = Auth::guard('api')->user()->cartItems()->count();
+        return response(['status_code' => 0,'message' => '','num' => $num]);
+    }
+
     //加入购物车
     public static function add($args){
         $user = User::find(Auth::guard('api')->user()->id);
