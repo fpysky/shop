@@ -17,8 +17,8 @@ class AuthController extends Controller
      */
 
     /**
-     * @api {post} /api/auth/register 01.注册
-     * @apiName register
+     * @api {post} /api/auth/login 01.注册
+     * @apiName login
      * @apiGroup 02Auth
      *
      * @apiParam {String} name              M   用户名

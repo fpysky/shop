@@ -5,7 +5,7 @@
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->group(['namespace' => 'App\Http\Controllers\Api\V1'],function($api){
-        $api->post('register','AuthController@register');
+        $api->post('login','AuthController@login');
 //        $api->post('auth/login','AuthController@login');
 //        $api->post('geetest_api_v1','AuthController@geetest_api_v1');//极验后端校验
 //        $api->get('/email_verify_notice', 'PagesController@emailVerifyNotice')->name('email_verify_notice');
