@@ -22,10 +22,8 @@ class AuthController extends Controller
         $id = config('geetest.id');
         $key = config('geetest.key');
         $geek = new \GeetestLib($id, $key);
-
         $data = array(
-            //"user_id" => $userid,//网站用户id
-            "client_type" => "native",//#web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
+            "client_type" => "web",//#web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
             "ip_address" => "127.0.0.1"//$this->request->getClientIp()
         );
         $status = $geek->pre_process($data, 1);
@@ -48,8 +46,8 @@ class AuthController extends Controller
 
         $data = array(
             //"user_id" => $userid, # 网站用户id
-            "client_type" => "native", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
-            "ip_address" => "127.0.0.1"//$this->request->getClientIp() # 请在此处传输用户请求验证时所携带的IP
+            "client_type" => "web", #web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
+            "ip_address" => $request->getClientIp()//"139.199.203.126"//$this->request->getClientIp() # 请在此处传输用户请求验证时所携带的IP
         );
         if ($geetest_status == 1) {   //服务器正常
             $result = $geek->success_validate($geetest_challenge, $geetest_validate, $geetest_seccode, $data);

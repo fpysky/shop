@@ -15,6 +15,7 @@ $api->version('v1', function ($api) {
         $api->post('valiGeet', 'AuthController@valiGeet');
         $api->get('user','AuthController@user');
         $api->post('logout', 'AuthController@logout');
+        $api->post('register', 'AuthController@register');
     });
 //    $api->group([
 //        'middleware' => 'jwt.api.refresh:api',//jwt.api.auth:api

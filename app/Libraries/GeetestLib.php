@@ -31,7 +31,7 @@ class GeetestLib {
             $data['user_id'] = $param;
         }
         $query = http_build_query($data);
-        $url = "http://api.geetest.com/login.php?" . $query;
+        $url = "http://api.geetest.com/register.php?" . $query;
         $challenge = $this->send_request($url);
         if (strlen($challenge) != 32) {
             $this->failback_process();
