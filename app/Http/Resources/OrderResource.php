@@ -32,8 +32,8 @@ class OrderResource extends Resource
             'ship_data' => $this->ship_data,
             'extra' => $this->extra,
             'items' => $this->items,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->format('Y-m-d H:i'),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i'),
         ];
     }
 }
