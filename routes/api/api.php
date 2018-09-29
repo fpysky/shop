@@ -16,6 +16,7 @@ $api->version('v1', function ($api) {
         $api->get('user','AuthController@user');
         $api->post('logout', 'AuthController@logout');
         $api->post('register', 'AuthController@register');
+        $api->get('search', 'SearchController@search');
     });
 //    $api->group([
 //        'middleware' => 'jwt.api.refresh:api',//jwt.api.auth:api

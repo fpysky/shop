@@ -6,9 +6,12 @@ use App\Http\Resources\ProductDetailResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSkuResource;
 use Auth;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'title', 'description', 'image', 'on_sale',
         'rating', 'sold_count', 'review_count', 'price', 'product_classify_id'
@@ -210,9 +213,10 @@ class Product extends Model
 
     //获取手机产品列表
     public static function mobilePhones(){
-        $list = Product::where('on_sale','=',1)->whereIn('product_classify_id',function($query){
-            $query->select(['id'])->from('product_classifies')->where('pid','=',1);
-        })->take(8)->orderBy('created_at','desc')->get();
+//        $list = Product::where('on_sale','=',1)->whereIn('product_classify_id',function($query){
+//            $query->select(['id'])->from('product_classifies')->where('pid','=',1);
+//        })->take(8)->orderBy('created_at','desc')->get();
+        $list = Product::where('on_sale','=',1)->take(8)->orderBy('created_at','desc')->get();
         $list = ProductResource::collection($list);
         return response(['status_code' => 0,'list' => $list]);
     }
