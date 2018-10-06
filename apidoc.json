@@ -1,0 +1,9 @@
+{
+  "name": "商城",
+  "version": "0.1.0",
+  "description": "商城 RESTful API文档",
+  "apidoc": {
+    "title": "商城API文档",
+    "url" : "http://shop.test/apidoc"
+  }
+}
