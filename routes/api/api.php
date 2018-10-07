@@ -17,6 +17,8 @@ $api->version('v1', function ($api) {
         $api->post('logout', 'AuthController@logout');
         $api->post('register', 'AuthController@register');
         $api->get('search', 'SearchController@search');
+        $api->get('login/github', 'AuthController@redirectToProvider');
+        $api->get('login/github/callback', 'AuthController@handleProviderCallback');
     });
 //    $api->group([
 //        'middleware' => 'jwt.api.refresh:api',//jwt.api.auth:api

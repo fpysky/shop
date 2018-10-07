@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterFormRequest;
-use App\Http\Requests\LoginFormRequest;
-use JWTAuth,Auth;
+use Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Socialite;
 
 class AuthController extends Controller
 {
@@ -166,5 +166,39 @@ class AuthController extends Controller
             Auth::guard('api')->user()->token()->delete();
         }
         return response(['message' => '登出成功', 'status_code' => 0]);
+    }
+
+    /**
+     * 将用户重定向到github
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        $gUser = Socialite::driver('github')->user();
+        $uRes = User::where('github_id','=',$gUser->user['id'])->first();
+        $accessToken = '';
+        if(empty($uRes)){
+            $user = new User;
+            $user->name = $gUser->nickname;
+            $user->github_id = $gUser->user['id'];
+            $user->email = $gUser->user['email'];
+            $user->save();
+            $accessToken = $user->createToken('token')->accessToken;
+        }else{
+            $accessToken = $uRes->createToken('token')->accessToken;
+        }
+        return redirect(config('app.url').'/login?accessToken='.$accessToken);
     }
 }
